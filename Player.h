@@ -4,13 +4,8 @@
 #include "CardAndDeck.h"
 #include <string>
 
-class Game{ 									// delete after writing real class game
-
-};
-
-class UserInteraction{                          // delete after writing real UserInteraction class
-
-};
+class Game;                                     // declarations of Game class
+class UserInteraction;                          // declarations of UserInteraction class
 
 //------------------------------------------------------------------------------
 
@@ -21,14 +16,16 @@ private:
 	Deck deck;
 	std::string name;
 
+protected:
+	Player();                                   // Default constructor, doing nothing
+
 public:
-	Player();           						// Default constructor, doing nothing
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual void MakeTurn() {}                    // Method which do turn of a player
-	virtual void MakeRequests() {}                // Method which ask another player
+	virtual void MakeTurn() = 0;                // Method which do turn of a player
+	virtual void MakeRequests() = 0;            // Method which ask another player
 
-	const Deck& Deck() const;      		// Getter's method's
+	const Deck& Deck() const;      				// Getter's method's
 	const Game* Game() const;
 	const std::string& Name() const;
 	const UserInteraction* UserInteraction() const;
