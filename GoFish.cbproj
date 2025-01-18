@@ -183,6 +183,10 @@
             <DependentOn>CardAndDeck.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Game.cpp">
+            <DependentOn>Game.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="GoFish.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
