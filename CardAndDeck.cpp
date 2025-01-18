@@ -10,13 +10,16 @@ Card::Card(){                                    // Default Construcor. Initiali
 	suit = Suit::Hearts;
     type = Type::Two;
 }
+
 Card::Card(enum Suit suit, enum Type type){      // Initialize card with params
 	this->suit = suit;
     this->type = type;
 }
+
 const Suit& Card::Suit() const{               	 // Getter method, returned Suit
 	return suit;
 }
+
 const Type& Card::Type() const{               	 // Getter method, returned Type
 	return type;
 }
@@ -24,6 +27,7 @@ const Type& Card::Type() const{               	 // Getter method, returned Type
 enum Suit& Card::Suit() {               	 	 // Setter method, seted Suit
 	return suit;
 }
+
 enum Type& Card::Type(){                   		 // Setter method, seted Type
     return type;
 }
@@ -58,22 +62,25 @@ Card Deck::FindCardByIndex(int index){         	 // Returned card by index
 	return deck[index];
 }
 
-int Deck::FindCardBySuit(Suit suit){          	 // Returned first index of card with taken suit
+int Deck::FindCardBySuit(Suit suit){          	 // Returned first index of card with taken suit or -1 else
 	for(int i = 0; i < size; i++)
 		if(deck[i].Suit() == suit)
 			return i;
+	return -1;
 }
 
-int Deck::FindCardByType(Type type){              // Returned first index of card with taken type
+int Deck::FindCardByType(Type type){              // Returned first index of card with taken type and -1 else
 	for(int i = 0; i < size; i++)
 		if(deck[i].Type() == type)
-            return i;
+			return i;
+    return -1;
 }
 
 int Deck::HaveCardWithTypeAndSuit(Type type, Suit suit){  // Returned -1, if deck hasn't a card with taken type and suit and index of a card if else
     for(int i = 0; i < size; i++)
 		if(deck[i].Type() == type && deck[i].Suit() == suit)
-            return true;
+			return i;
+    return -1;
 }
 
 int Deck::CountOfCardsWithSuit(Suit suit){       // Returned count of cards with taken suit
