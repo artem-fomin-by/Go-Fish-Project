@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
-#include "CardAndDeck.h"
+//#include "CardAndDeck.h"
+#include "Player.h"
 #include <vcl.h>
 #pragma hdrstop
 
@@ -14,3 +15,4 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
+
