@@ -10,29 +10,29 @@ Card::Card(){                                    // Default Construcor. Initiali
 	suit = Suit::Hearts;
     type = Type::Two;
 }
-Card::Card(Suit suit, Type type){                // Initialize card with params
+Card::Card(enum Suit suit, enum Type type){      // Initialize card with params
 	this->suit = suit;
     this->type = type;
 }
-const Suit Card::GetSuit(){              		 // Getter method, returned Suit
-    return suit;
+const Suit& Card::Suit() const{               	 // Getter method, returned Suit
+	return suit;
 }
-const Type Card::GetType(){              		 // Getter method, returned Type
-    return type;
+const Type& Card::Type() const{               	 // Getter method, returned Type
+	return type;
 }
 
-void Card::SetSuit(Suit suit) {               	 // Setter method, seted Suit
-    this->suit = suit;
+enum Suit& Card::Suit() {               	 	 // Setter method, seted Suit
+	return suit;
 }
-void Card::SetType(Type type){                   // Setter method, seted Type
-	this->type = type;
+enum Type& Card::Type(){                   		 // Setter method, seted Type
+    return type;
 }
 
 
 //---------------------------------------------------------------------------
 // Deck methods
 
-Deck::Deck(){                            		  // Default constructor
+Deck::Deck(){                            		 // Default constructor
 	size = 0;
 }
 
@@ -60,26 +60,26 @@ Card Deck::FindCardByIndex(int index){         	 // Returned card by index
 
 int Deck::FindCardBySuit(Suit suit){          	 // Returned first index of card with taken suit
 	for(int i = 0; i < size; i++)
-		if(deck[i].GetSuit() == suit)
+		if(deck[i].Suit() == suit)
 			return i;
 }
 
 int Deck::FindCardByType(Type type){              // Returned first index of card with taken type
-    for(int i = 0; i < size; i++)
-		if(deck[i].GetType() == type)
+	for(int i = 0; i < size; i++)
+		if(deck[i].Type() == type)
             return i;
 }
 
 int Deck::HaveCardWithTypeAndSuit(Type type, Suit suit){  // Returned -1, if deck hasn't a card with taken type and suit and index of a card if else
     for(int i = 0; i < size; i++)
-		if(deck[i].GetType() == type && deck[i].GetSuit() == suit)
+		if(deck[i].Type() == type && deck[i].Suit() == suit)
             return true;
 }
 
 int Deck::CountOfCardsWithSuit(Suit suit){       // Returned count of cards with taken suit
 	int count = 0;
 	for(int i = 0; i < size; i++)
-		if(deck[i].GetSuit() == suit)
+		if(deck[i].Suit() == suit)
 			count++;
     return count;
 }
@@ -87,14 +87,14 @@ int Deck::CountOfCardsWithSuit(Suit suit){       // Returned count of cards with
 int Deck::CountOfCardsWithType(Type type){       // Returned count of cards with taken type
     int count = 0;
 	for(int i = 0; i < size; i++)
-		if(deck[i].GetType() == type)
+		if(deck[i].Type() == type)
 			count++;
     return count;
 }
 
 void Deck::PopCard(Type type, Suit suit){        // Pop card with taken type and suit
 	for(int i = 0; i < size; i++){
-		if(deck[i].GetSuit() == suit && deck[i].GetType() == type){
+		if(deck[i].Suit() == suit && deck[i].Type() == type){
 			deck.erase(deck.begin() + i);
             return;
 		}

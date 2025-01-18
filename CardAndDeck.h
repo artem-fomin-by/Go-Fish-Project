@@ -37,11 +37,10 @@ public:
 
 	Card();                            		 		 // Default Construcor. Initialise based card (two of Hearts)
 	Card(Suit, Type);                  		 		 // Initialize card with params
-	const Suit GetSuit();              		 		 // Getter method, returned Suit
-	const Type GetType();              		 		 // Getter method, returned Type
-
-	void SetSuit(Suit);                		 		 // Setter method, seted Suit
-	void SetType(Type);                		 		 // Setter method, seted Type
+	const Suit& Suit() const;              		 	 // Getter method, returned Suit
+	enum Suit& Suit();                                    // Setter method, seted Suit
+	const Type& Type() const;              		 	 // Getter method, returned Type
+	enum Type& Type();                                    // Setter method, seted Type
 };
 
 class Deck{                            		 		 // Deck class
