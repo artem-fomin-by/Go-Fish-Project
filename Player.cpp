@@ -3,85 +3,97 @@
 
 #include "Player.h"
 
-Player::Player() {                                   	// Default constructor, doing nothing
+Player::Player(){
 
 }
 
-virtual Player::~Player() {                          	// Default destructor, doing nothing
+Player::~Player() {                          	// Default destructor, doing nothing
 
 }
 
-const enum Deck& Player::Deck() const {      			// Getter's method's
+const Deck& Player::Deck() const {      			// Getter's method's
 	return deck;
 }
 
-const Game& Player::Game() const{
+const Game* Player::Game() const{
 	return game;
 }
 
-const string& Player::Name() const {
+const std::string& Player::Name() const {
 	return name;
 }
 
-const UserInteraction& Player::UserInteraction() const {
+const UserInteraction* Player::UserInteraction() const {
 	return userInteraction;
 }
 
-enum Deck& Player::Deck() {                  		  	// Setter's method's
+class Deck& Player::Deck() {                  		  	// Setter's method's
 	return deck;
 }
 
-Game& Player::Game() {
+class Game* Player::Game() {
    return game;
 }
 
-string& Player::Name() {
+std::string& Player::Name() {
 	return name;
 }
 
-UserInteraction& Player::UserInteraction(){
+class UserInteraction* Player::UserInteraction(){
 	return userInteraction;
 }
 
 
 //------------------------------------------------------------------------------
 
-void MakeTurn() {                    					// Method which do turn of a player
+HumanPlayer::HumanPlayer(){
 
 }
 
-void MakeRequests() {                					// Method which ask another player
+void HumanPlayer::MakeTurn() {                    					// Method which do turn of a player
 
 }
 
-void AsnwerRequest() {               					// Method which answer the question
+void HumanPlayer::MakeRequests() {                					// Method which ask another player
 
 }
 
-//------------------------------------------------------------------------------
-
-void MakeTurn() {                    					// Method which do turn of a player
-
-}
-
-void MakeRequests() {                					// Method which ask another player
-
-}
-
-void AsnwerRequest() {               					// Method which answer the question
+void HumanPlayer::AsnwerRequest() {               					// Method which answer the question
 
 }
 
 //------------------------------------------------------------------------------
 
-void MakeTurn() {                    					// Method which do turn of a player
+InternalComputerPlayer::InternalComputerPlayer(){
 
 }
 
-void MakeRequests() {                					// Method which ask another player
+void InternalComputerPlayer::MakeTurn() {                    					// Method which do turn of a player
 
 }
 
-void AsnwerRequest() {               					// Method which answer the question
+void InternalComputerPlayer::MakeRequests() {                					// Method which ask another player
+
+}
+
+void InternalComputerPlayer::AsnwerRequest() {               					// Method which answer the question
+
+}
+
+//------------------------------------------------------------------------------
+
+ExternalComputerPlayer::ExternalComputerPlayer(){
+
+}
+
+void ExternalComputerPlayer::MakeTurn() {                    					// Method which do turn of a player
+
+}
+
+void ExternalComputerPlayer::MakeRequests() {                					// Method which ask another player
+
+}
+
+void ExternalComputerPlayer::AsnwerRequest() {               					// Method which answer the question
 
 }
