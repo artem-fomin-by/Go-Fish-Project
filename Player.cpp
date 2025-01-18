@@ -7,7 +7,7 @@ Player::Player(){
 
 }
 
-Player::~Player() {                          	// Default destructor, doing nothing
+Player::~Player() {                          		// Default destructor, doing nothing
 
 }
 

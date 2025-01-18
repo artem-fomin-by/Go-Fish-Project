@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 //#include "CardAndDeck.h"
-#include "Player.h"
+#include "Game.h"
 #include <vcl.h>
 #pragma hdrstop
 
