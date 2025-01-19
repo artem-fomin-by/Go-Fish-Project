@@ -53,7 +53,7 @@ bool Player::CountRequest(int count, Type t){
 bool Player::SuitRequest(Type t, const std::vector<Suit>& suits){
 	auto res = true;
 	for(auto suit : suits){
-		res &= deck.HaveCardWithTypeAndSuit(suit, t) >= 0;
+		res &= deck.HaveCardWithTypeAndSuit(t, suit) >= 0;
 	}
 
 	userInteraction->ShowSuitResponse(res);
