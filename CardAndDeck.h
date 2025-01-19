@@ -2,16 +2,19 @@
 // Contains enum classes Suit and Type
 // Also contains classes Card and Deck
 
+#ifndef CardAndDeckH
+#define CardAndDeckH
+
 #include <vector>
 
-enum class Suit{
+enum Suit{
 	Hearts,       //Черви
 	Spades,       //Пики
 	Diamonds,     //Бубы
 	Clubs         //Крести
 };
 
-enum class Type {
+enum Type {
 	Two,
 	Three,
 	Four,
@@ -22,7 +25,7 @@ enum class Type {
 	Nine,
 	Ten,
 	Jack,
-    Queen,
+	Queen,
 	King,
 	Ace
 };
@@ -69,3 +72,5 @@ public:
 	std::vector<Card>::iterator end();         		 // Returned end iterator
 	std::vector<Card>::reverse_iterator rend();      // Returned rend iterator
 };
+#endif
+

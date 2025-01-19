@@ -1,17 +1,20 @@
 // h file
 // Contains player's classes
 
+#ifndef PlayerH
+#define PlayerH
+
 #include "CardAndDeck.h"
 #include <string>
+#include "GameCommands.h"
+#include "UserInteraction.h"
 
-class Game;                                     // declarations of Game class
-class UserInteraction;                          // declarations of UserInteraction class
+class GameState;
 
 //------------------------------------------------------------------------------
 
 class Player{									// abstract class Player
 private:
-	Game* game;
 	UserInteraction* userInteraction;
 	Deck deck;
 	std::string name;
@@ -22,16 +25,16 @@ protected:
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual void MakeTurn() = 0;                // Method which do turn of a player
-	virtual void MakeRequests() = 0;            // Method which ask another player
+	virtual std::vector<GameCommand*> MakeTurn(const GameState&) = 0;                // Method which do turn of a player
+	bool TypeRequest(Type);
+	bool CountRequest(int, Type);
+	bool SuitRequest(Type, const std::vector<Suit>&);
 
-	const Deck& Deck() const;      				// Getter's method's
-	const Game* Game() const;
+	const Deck& Deck() const;   
 	const std::string& Name() const;
 	const UserInteraction* UserInteraction() const;
 
-	class Deck& Deck();                  		// Setter's method's
-	class Game* Game();
+	class Deck& Deck();
 	std::string& Name();
 	class UserInteraction* UserInteraction();
 };
@@ -41,25 +44,21 @@ public:
 class HumanPlayer : public Player{      		// HumanPlayer class
 public:
 	HumanPlayer();
-	void MakeTurn();                    		// Method which do turn of a player
-	void MakeRequests();                		// Method which ask another player
-	void AsnwerRequest();               		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player              		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class InternalComputerPlayer : public Player {  // InternalComputerPlayer class
     InternalComputerPlayer();
-	void MakeTurn();                    		// Method which do turn of a player
-	void MakeRequests();                		// Method which ask another player
-	void AsnwerRequest();               		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player           		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class ExternalComputerPlayer : public Player { 	// ExternalComputerPlayer class
     ExternalComputerPlayer();
-	void MakeTurn();                   		 	// Method which do turn of a player
-	void MakeRequests();                		// Method which ask another player
-    void AsnwerRequest();               		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&) override;                   		 	// Method which do turn of a player     		// Method which answer the question
 };
+#endif
+
