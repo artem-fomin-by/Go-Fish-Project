@@ -81,18 +81,18 @@ class GameState
 	GameState();
 	GameState(Player* player1, Player* player2, Player* player3, Player* player4);
 
-	__property const std::function<bool(Type)>& Player1TypeRequest = { getPlayer1TypeRequest, setPlayer1TypeRequest };
-	__property const std::function<bool(Type)>& Player2TypeRequest = { getPlayer2TypeRequest, setPlayer2TypeRequest };
-	__property const std::function<bool(Type)>& Player3TypeRequest = { getPlayer3TypeRequest, setPlayer3TypeRequest };
-	__property const std::function<bool(Type)>& Player4TypeRequest = { getPlayer4TypeRequest, setPlayer4TypeRequest };
+	__property const std::function<bool(Type)>& Player1TypeRequest = { read = getPlayer1TypeRequest, write = setPlayer1TypeRequest };
+	__property const std::function<bool(Type)>& Player2TypeRequest = { read = getPlayer2TypeRequest, write = setPlayer2TypeRequest };
+	__property const std::function<bool(Type)>& Player3TypeRequest = { read = getPlayer3TypeRequest, write = setPlayer3TypeRequest };
+	__property const std::function<bool(Type)>& Player4TypeRequest = { read = getPlayer4TypeRequest, write = setPlayer4TypeRequest };
 
-	__property const std::function<bool(int)>& Player1CountRequest = { getPlayer1CountRequest, setPlayer1CountRequest };
-	__property const std::function<bool(int)>& Player2CountRequest = { getPlayer2CountRequest, setPlayer2CountRequest };
-	__property const std::function<bool(int)>& Player3CountRequest = { getPlayer3CountRequest, setPlayer3CountRequest };
-	__property const std::function<bool(int)>& Player4CountRequest = { getPlayer4CountRequest, setPlayer4CountRequest };
+	__property const std::function<bool(int)>& Player1CountRequest = { read = getPlayer1CountRequest, write = setPlayer1CountRequest };
+	__property const std::function<bool(int)>& Player2CountRequest = { read = getPlayer2CountRequest, write = setPlayer2CountRequest };
+	__property const std::function<bool(int)>& Player3CountRequest = { read = getPlayer3CountRequest, write = setPlayer3CountRequest };
+	__property const std::function<bool(int)>& Player4CountRequest = { read = getPlayer4CountRequest, write = setPlayer4CountRequest };
 
-	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player1SuitRequest = { getPlayer1SuitRequest, setPlayer1SuitRequest };
-	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player2SuitRequest = { getPlayer2SuitRequest, setPlayer2SuitRequest };
-	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player3SuitRequest = { getPlayer3SuitRequest, setPlayer3SuitRequest };
-	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player4SuitRequest = { getPlayer4SuitRequest, setPlayer4SuitRequest };
+	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player1SuitRequest = { read = getPlayer1SuitRequest, write = setPlayer1SuitRequest };
+	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player2SuitRequest = { read = getPlayer2SuitRequest, write = setPlayer2SuitRequest };
+	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player3SuitRequest = { read = getPlayer3SuitRequest, write = setPlayer3SuitRequest };
+	__property const std::function<bool(Type, const std::vector<Suit>&)>& Player4SuitRequest = { read = getPlayer4SuitRequest, write = setPlayer4SuitRequest };
 };
