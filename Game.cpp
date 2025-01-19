@@ -120,3 +120,24 @@ void GameState::setPlayer3SuitRequest(const std::function<bool(Type, const std::
 void GameState::setPlayer4SuitRequest(const std::function<bool(Type, const std::vector<Suit>&)>& callback){
     player4SuitRequest = callback;
 }
+
+GameState::GameState(){
+
+}
+GameState::GameState(Player* player1, Player* player2, Player* player3, Player* player4){
+    player1TypeRequest = player1->TypeRequest;
+    player2TypeRequest = player2->TypeRequest;
+    player3TypeRequest = player3->TypeRequest;
+    player4TypeRequest = player4->TypeRequest;
+
+    player1CountRequest = player1->CountRequest;
+    player2CountRequest = player2->CountRequest;
+    player3CountRequest = player3->CountRequest;
+    player4CountRequest = player4->CountRequest;
+
+    player1SuitRequest = player1->SuitRequest;
+    player2SuitRequest = player2->SuitRequest;
+    player3SuitRequest = player3->SuitRequest;
+    player4SuitRequest = player4->SuitRequest;
+}
+
