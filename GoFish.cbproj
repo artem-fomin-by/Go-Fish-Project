@@ -187,6 +187,10 @@
             <DependentOn>Game.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
+        <CppCompile Include="GameCommands.cpp">
+            <DependentOn>GameCommands.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="GoFish.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
