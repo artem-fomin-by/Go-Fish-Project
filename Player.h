@@ -7,8 +7,8 @@
 #include "CardAndDeck.h"
 #include <string>
 #include "GameCommands.h"
+#include "UserInteraction.h"
 
-class UserInteraction;                          // declarations of UserInteraction class
 class GameState;
 
 //------------------------------------------------------------------------------
@@ -25,8 +25,7 @@ protected:
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual std::vector<GameCommand*> MakeTurn(const GameState&) = 0;  
-	              // Method which do turn of a player
+	virtual std::vector<GameCommand*> MakeTurn(const GameState&) = 0;                // Method which do turn of a player
 	bool TypeRequest(Type);
 	bool CountRequest(int, Type);
 	bool SuitRequest(Type, const std::vector<Suit>&);
