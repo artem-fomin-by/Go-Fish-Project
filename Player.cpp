@@ -39,14 +39,14 @@ class UserInteraction* Player::UserInteraction(){
 bool Player::TypeRequest(Type t){
 	auto res = deck.FindCardByType(t) >= 0;
 	
-	userInteraction->ShowTypeResponse(res);
+	//userInteraction->ShowTypeResponse(res);
 	
 	return res;
 }
 bool Player::CountRequest(int count, Type t){
 	auto res = deck.CountOfCardsWithType(t) == count;
 	
-	userInteraction->ShowCountResponse(res);
+	//userInteraction->ShowCountResponse(res);
 	
 	return res;
 }
@@ -56,7 +56,7 @@ bool Player::SuitRequest(Type t, const std::vector<Suit>& suits){
 		res &= deck.HaveCardWithTypeAndSuit(t, suit) >= 0;
 	}
 
-	userInteraction->ShowSuitResponse(res);
+	//userInteraction->ShowSuitResponse(res);
 
 	return res;
 }
