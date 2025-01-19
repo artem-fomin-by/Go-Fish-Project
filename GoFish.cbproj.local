@@ -23,5 +23,8 @@
     <Transaction>2025-01-19 15:35:23.000.790,=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.cpp</Transaction>
     <Transaction>2025-01-19 15:35:32.000.351,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.cpp=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GameCommands.cpp</Transaction>
     <Transaction>2025-01-19 15:35:32.000.351,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GameCommands.h</Transaction>
+    <Transaction>2025-01-19 15:53:54.000.990,=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>2025-01-19 15:54:08.000.993,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\UserInteraction.h</Transaction>
+    <Transaction>2025-01-19 15:54:08.000.993,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit2.cpp=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\UserInteraction.cpp</Transaction>
   </Transactions>
 </BorlandProject>
