@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B8BBFC71-ED6F-470F-BFFA-47F1B7CD3390}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="GoFish.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Console\Project1.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="GoFish">
+        <MSBuild Projects="GoFish.cbproj"/>
+    </Target>
+    <Target Name="GoFish:Clean">
+        <MSBuild Projects="GoFish.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GoFish:Make">
+        <MSBuild Projects="GoFish.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Project1">
+        <MSBuild Projects="Console\Project1.cbproj"/>
+    </Target>
+    <Target Name="Project1:Clean">
+        <MSBuild Projects="Console\Project1.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Project1:Make">
+        <MSBuild Projects="Console\Project1.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="GoFish;Project1"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="GoFish:Clean;Project1:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="GoFish:Make;Project1:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
