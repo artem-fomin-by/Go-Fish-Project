@@ -40,7 +40,9 @@
 *.pdi
 *.res
 *.tds
+*.local
 
 # CPPBuilder directories
 __history
 __recovery
+
