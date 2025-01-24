@@ -2,6 +2,8 @@
 // Contains player class
 
 #include "Player.h"
+#include "Game.h"
+#include "UserInteraction.h"
 
 Player::Player(){
 
@@ -13,10 +15,6 @@ Player::~Player() {                          		// Default destructor, doing noth
 
 const Deck& Player::Deck() const {      			// Getter's method's
 	return deck;
-}
-
-const Game* Player::Game() const{
-	return game;
 }
 
 const std::string& Player::Name() const {
@@ -31,10 +29,6 @@ class Deck& Player::Deck() {                  		  	// Setter's method's
 	return deck;
 }
 
-class Game* Player::Game() {
-   return game;
-}
-
 std::string& Player::Name() {
 	return name;
 }
@@ -43,6 +37,30 @@ class UserInteraction* Player::UserInteraction(){
 	return userInteraction;
 }
 
+bool Player::TypeRequest(Type t){
+	auto res = deck.FindCardByType(t) >= 0;
+	
+	userInteraction->ShowTypeResponse(res);
+	
+	return res;
+}
+bool Player::CountRequest(int count, Type t){
+	auto res = deck.CountOfCardsWithType(t) == count;
+	
+	userInteraction->ShowCountResponse(res);
+	
+	return res;
+}
+bool Player::SuitRequest(Type t, const std::vector<Suit>& suits){
+	auto res = true;
+	for(auto suit : suits){
+		res &= deck.HaveCardWithTypeAndSuit(t, suit) >= 0;
+	}
+
+	userInteraction->ShowSuitResponse(res);
+
+	return res;
+}
 
 //------------------------------------------------------------------------------
 
@@ -50,15 +68,7 @@ HumanPlayer::HumanPlayer(){
 
 }
 
-void HumanPlayer::MakeTurn() {                    					// Method which do turn of a player
-
-}
-
-void HumanPlayer::MakeRequests() {                					// Method which ask another player
-
-}
-
-void HumanPlayer::AsnwerRequest() {               					// Method which answer the question
+std::vector<GameCommand*> HumanPlayer::MakeTurn(const GameState&){                    					// Method which do turn of a player
 
 }
 
@@ -68,15 +78,7 @@ InternalComputerPlayer::InternalComputerPlayer(){
 
 }
 
-void InternalComputerPlayer::MakeTurn() {                    					// Method which do turn of a player
-
-}
-
-void InternalComputerPlayer::MakeRequests() {                					// Method which ask another player
-
-}
-
-void InternalComputerPlayer::AsnwerRequest() {               					// Method which answer the question
+std::vector<GameCommand*> InternalComputerPlayer::MakeTurn(const GameState&){                    					// Method which do turn of a player
 
 }
 
@@ -86,14 +88,7 @@ ExternalComputerPlayer::ExternalComputerPlayer(){
 
 }
 
-void ExternalComputerPlayer::MakeTurn() {                    					// Method which do turn of a player
+std::vector<GameCommand*> ExternalComputerPlayer::MakeTurn(const GameState&){                    					// Method which do turn of a player
 
 }
 
-void ExternalComputerPlayer::MakeRequests() {                					// Method which ask another player
-
-}
-
-void ExternalComputerPlayer::AsnwerRequest() {               					// Method which answer the question
-
-}
