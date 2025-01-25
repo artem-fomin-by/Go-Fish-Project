@@ -12,7 +12,7 @@ std::string TypeTranslator(Type type){
 			return "двойки";
 			break;
 		case Three:
-			return "тройки"
+			return "тройки";
 			break;
 		case Four:
 			return "четвёрки";
@@ -44,19 +44,19 @@ std::string TypeTranslator(Type type){
 		case King:
 			return "короли";
 			break;
-		case Ace;
+		case Ace:
 			return "тузы";
 			break;
 	}
 }
 
 std::string SuitTranslator(Suit suit){
-    switch(type){
+    switch(suit){
 		case Hearts:
 			return "черви";
 			break;
 		case Spades:
-			return "пики"
+			return "пики";
 			break;
 		case Diamonds:
 			return "бубы";
@@ -76,7 +76,7 @@ void ConsoleUI::ShowWhoseTurnNow(Player* player){
 }
 
 void ConsoleUI::ShowTypeRequest(Type type, Player* player) {
-	std::cout << "Спрашивает есть ли у " << player->Name() << " " << TranslateType(type) << '\n';
+	std::cout << "Спрашивает есть ли у " << player->Name() << " " << TypeTranslator(type) << '\n';
 }
 
 void ConsoleUI::ShowTypeResponse(bool answer, Player* player) {
@@ -87,7 +87,7 @@ void ConsoleUI::ShowTypeResponse(bool answer, Player* player) {
 }
 
 void ConsoleUI::ShowCountRequest(int count, Type type, Player* player) {
-	std::cout << "Спрашивает у " << player->Name() << ", у него " << to_string(count) << ' ' << TranslateType(type) << '\n';
+	std::cout << "Спрашивает у " << player->Name() << ", у него " << std::to_string(count) << ' ' << TypeTranslator(type) << '\n';
 }
 
 void ConsoleUI::ShowCountResponse(bool answer, Player* player) {
@@ -100,7 +100,7 @@ void ConsoleUI::ShowCountResponse(bool answer, Player* player) {
 void ConsoleUI::ShowSuitRequest(Type type, const std::vector<Suit>& cards, Player* player) {
 	std::cout << "Спрашивает у " << player->Name() << ", у него ";
 	for(int i = 0; i < cards.size(); i++){
-        std::cout << cards[i] << ", ";
+        std::cout << SuitTranslator(cards[i]) << ", ";
 	}
 }
 
