@@ -124,6 +124,7 @@ void GameState::setPlayer4SuitRequest(const std::function<bool(Type, const std::
 GameState::GameState(){
 
 }
+
 GameState::GameState(Player* player1, Player* player2, Player* player3, Player* player4){
     player1TypeRequest = player1->TypeRequest;
     player2TypeRequest = player2->TypeRequest;
