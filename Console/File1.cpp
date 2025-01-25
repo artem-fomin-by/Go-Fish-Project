@@ -4,5 +4,6 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-
+	int n;
+	std::cin >> n;
 }

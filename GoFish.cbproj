@@ -183,6 +183,10 @@
             <DependentOn>CardAndDeck.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="ConsoleUi.cpp">
+            <DependentOn>ConsoleUi.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Game.cpp">
             <DependentOn>Game.h</DependentOn>
             <BuildOrder>5</BuildOrder>
