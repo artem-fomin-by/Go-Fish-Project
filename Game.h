@@ -20,6 +20,7 @@ public:
 	Game();                                        // Default constructure
 
 	void MainLoop();                               // Main loop
+    void StartGame(Player*, Player*, Player*, Player*);
 
 	const Player* Player1() const;                 // Getter method's
 	const Player* Player2() const;
