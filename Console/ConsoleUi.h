@@ -8,6 +8,8 @@ class ConsoleUI : public UserInteraction {
 public:
 	ConsoleUI();
 
+    void ShowWhoseTurnNow(Player*);
+
 	void ShowTypeRequest(Type, Player*) override;
 	void ShowTypeResponse(bool, Player*) override;
 
