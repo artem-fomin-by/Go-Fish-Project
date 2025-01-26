@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.540,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\CardAndDeck.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.145,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\Player.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.145,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\Player.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.293,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\CardAndDeck.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.339,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\UsetIterection.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.320,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.373,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\Game.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.086,=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.dfm=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.339,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\UsetIterection.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.540,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\CardAndDeck.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.293,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\CardAndDeck.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.373,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\Game.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.493,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.500,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.130,E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj=E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.281,E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj=E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.cpp=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.132,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFishPCH2.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFishPCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.393,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFish.cbproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.649,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.521,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.320,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.913,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Project1PCH1.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFishPCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.132,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFishPCH1.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFishPCH2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.318,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.924,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFish.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.086,=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.cpp=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.339,E:\My_code\c++\CBuilder\GoFish\UsetIterection.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.924,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Project1.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFish.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.729,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,E:\My_code\c++\CBuilder\GoFish\Unit2.cpp=E:\My_code\c++\CBuilder\GoFish\ConsoleUi.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.393,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFish.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.373,E:\My_code\c++\CBuilder\GoFish\Game.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.540,E:\My_code\c++\CBuilder\GoFish\CardAndDeck.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.293,E:\My_code\c++\CBuilder\GoFish\CardAndDeck.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.145,E:\My_code\c++\CBuilder\GoFish\Player.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.500,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\GoFish.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.540,E:\My_code\c++\CBuilder\GoFish\CardAndDeck.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.293,E:\My_code\c++\CBuilder\GoFish\CardAndDeck.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.373,E:\My_code\c++\CBuilder\GoFish\Game.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.130,E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj=E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.281,E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj=E:\My_code\c++\CBuilder\GoFish\GoFish.cbproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.514,=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.913,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\GoFishPCH1.h=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Project1PCH1.h</Transaction>
-    <Transaction>2025.01.25 18:56:04.729,=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
-    <Transaction>2025.01.25 18:56:22.381,E:\My_code\c++\CBuilder\GoFish\ConsoleUi.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
-    <Transaction>2025.01.25 18:56:22.381,E:\My_code\c++\CBuilder\GoFish\ConsoleUi.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.267,C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\Default\Unit1.dfm=C:\Users\artem\Programming\CPP\MyFiles\Projects\CBuilder\GoFish\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,E:\My_code\c++\CBuilder\GoFish\Unit2.h=E:\My_code\c++\CBuilder\GoFish\ConsoleUi.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.145,E:\My_code\c++\CBuilder\GoFish\Player.cpp=E:\My_code\c++\CBuilder\GoFish\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.339,E:\My_code\c++\CBuilder\GoFish\UsetIterection.h=E:\My_code\c++\CBuilder\GoFish\Unit2.h</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Unit1.cpp"/>
@@ -48,7 +48,6 @@
     <File Path="GoFish.cpp"/>
     <File Path="GoFish.cpp"/>
     <File Path="GoFish.cpp"/>
-    <File Path="GoFishPCH2.h"/>
     <File Path="CardAndDeck.cpp"/>
     <File Path="CardAndDeck.cpp"/>
     <File Path="CardAndDeck.cpp"/>
@@ -87,6 +86,8 @@
     <File Path="UserInteraction.cpp"/>
     <File Path="UserInteraction.cpp"/>
     <File Path="UserInteraction.cpp"/>
+    <File Path="GameCommands.h"/>
+    <File Path="Player.h"/>
     <File Path="UserInteraction.h"/>
     <File Path="CardAndDeck.h"/>
     <File Path="UserInteraction.h"/>

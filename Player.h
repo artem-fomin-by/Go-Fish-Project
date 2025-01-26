@@ -25,7 +25,7 @@ protected:
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual std::vector<GameCommand*> MakeTurn(const GameState&) = 0;                // Method which do turn of a player
+	virtual std::vector<GameCommand*> MakeTurn(const GameState&, int) = 0;                // Method which do turn of a player
 	bool TypeRequest(Type);
 	bool CountRequest(int, Type);
 	bool SuitRequest(Type, const std::vector<Suit>&);
@@ -44,21 +44,21 @@ public:
 class HumanPlayer : public Player{      		// HumanPlayer class
 public:
 	HumanPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player              		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&, int) override;                    		// Method which do turn of a player              		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class InternalComputerPlayer : public Player {  // InternalComputerPlayer class
     InternalComputerPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player           		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&, int) override;                    		// Method which do turn of a player           		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class ExternalComputerPlayer : public Player { 	// ExternalComputerPlayer class
     ExternalComputerPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                   		 	// Method which do turn of a player     		// Method which answer the question
+	std::vector<GameCommand*> MakeTurn(const GameState&, int) override;                   		 	// Method which do turn of a player     		// Method which answer the question
 };
 #endif
 
