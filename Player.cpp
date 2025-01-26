@@ -72,7 +72,7 @@ HumanPlayer::HumanPlayer(){
 
 }
 
-std::vector<GameCommand*> HumanPlayer::MakeTurn(const GameState&, int){                    					// Method which do turn of a player
+std::vector<GameCommand*> HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
 
@@ -82,7 +82,7 @@ InternalComputerPlayer::InternalComputerPlayer(){
 
 }
 
-std::vector<GameCommand*> InternalComputerPlayer::MakeTurn(const GameState& gameState, int indexOfPlayer){                    					// Method which do turn of a player
+void InternalComputerPlayer::MakeTurn(int indexOfPlayer){                    					// Method which do turn of a player
 	std::vector<GameCommand*> commands;
 	GameCommand* command;
 
@@ -100,36 +100,26 @@ std::vector<GameCommand*> InternalComputerPlayer::MakeTurn(const GameState& game
 
 	bool response;
 
-	std::function<bool(Type)> TypeRequest;
-	std::function<bool(int, Type)> CountRequest;
-	std::function<bool(Type, std::vector<Suit>&)> SuitRequest;
+	Player chosenPlayer;
 
 	switch (chosenPlayer) {
 		case 0:
-			TypeRequest = gameState.Player1TypeRequest;
-			CountRequest = gameState.Player1CountRequest;
-			SuitRequest = gameState.Player1SuitRequest;
+			chosenPlayer = Game->Player1();
 			break;
 		case 1:
-			TypeRequest = gameState.Player2TypeRequest;
-			CountRequest = gameState.Player2CountRequest;
-			SuitRequest = gameState.Player2SuitRequest;
+			chosenPlayer = Game->Player2();
 			break;
 		case 2:
-			TypeRequest = gameState.Player3TypeRequest;
-			CountRequest = gameState.Player3CountRequest;
-			SuitRequest = gameState.Player3SuitRequest;
+			chosenPlayer = Game->Player3();
 			break;
 		case 3:
-			TypeRequest = gameState.Player4TypeRequest;
-			CountRequest = gameState.Player4CountRequest;
-			SuitRequest = gameState.Player4SuitRequest;
+			chosenPlayer = Game->Player4();
             break;
 	}
 
-	response = TypeRequest(chosenType);
+	response = chosenPlayer->TypeRequest(chosenType);
 	if(!response)
-		return commands;
+        return;
 }
 
 //------------------------------------------------------------------------------
@@ -138,7 +128,7 @@ ExternalComputerPlayer::ExternalComputerPlayer(){
 
 }
 
-std::vector<GameCommand*> ExternalComputerPlayer::MakeTurn(const GameState&, int){                    					// Method which do turn of a player
+std::vector<GameCommand*> ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
 
