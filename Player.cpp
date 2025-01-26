@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Player::Player(){
-
+    boxes = 0;
 }
 
 Player::~Player() {                          		// Default destructor, doing nothing
@@ -24,10 +24,6 @@ const std::string& Player::Name() const {
 	return name;
 }
 
-const UserInteraction* Player::UserInteraction() const {
-	return userInteraction;
-}
-
 class Deck& Player::Deck() {                  		  	// Setter's method's
 	return deck;
 }
@@ -36,7 +32,11 @@ std::string& Player::Name() {
 	return name;
 }
 
-class UserInteraction* Player::UserInteraction(){
+const UserInteraction* Player::UserInteraction() const {
+	return userInteraction;
+}
+
+UserInteraction*& Player::UserInteraction() {
 	return userInteraction;
 }
 
@@ -67,25 +67,52 @@ bool Player::SuitRequest(Type t, const std::vector<Suit>& suits){
 	return res;
 }
 
+int Player::IsHaveBox() {
+	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
+	std::vector<int> counter(13);
+
+	for(auto i : deck)
+        counter[i.Type()]++;
+
+	for(int i = 0; i < 13; i++)
+		if(counter[i] == 4)
+			return i;
+    return -1;
+}
+
+const int& Player::Boxes() const {
+    return boxes;
+}
+
+int& Player::Boxes(){
+    return boxes;
+}
+
+const Game* Player::Game() const{
+    return game;
+}
+
+Game*& Player::Game(){
+    return game;
+}
+
 //------------------------------------------------------------------------------
 
 HumanPlayer::HumanPlayer(){
-
+    boxes = 0;
 }
 
-void HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
+bool HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
 
 //------------------------------------------------------------------------------
 
 InternalComputerPlayer::InternalComputerPlayer(){
-
+    boxes = 0;
 }
 
-void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
-	GameCommand* command;
-
+bool InternalComputerPlayer::MakeTurn(int indexOfPlayer){
     srand(time(nullptr));
 
     std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
@@ -101,8 +128,6 @@ void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
 		bool response;
 		Player* chosenPlayer;
 
-        userInteraction->ShowTypeRequest(chosenType, chosenPlayer);
-
 		switch (chosenPlayerInt) {
 			case 0:
 				chosenPlayer = game->Player1();
@@ -117,18 +142,18 @@ void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
 				chosenPlayer = game->Player4();
 				break;
 		}
-
+        userInteraction->ShowTypeRequest(chosenType, chosenPlayer);
 		response = chosenPlayer->TypeRequest(chosenType);
-		userInteraction->ShowTypeResponse(response, chosenPlayer);
+		//userInteraction->ShowTypeResponse(response, chosenPlayer);
 		if(!response)
-			return;
+			return false;
 
-		int chosenCount = rand() % 4;
+		int chosenCount = rand() % 4 + 1;
 		userInteraction->ShowCountRequest(chosenCount, chosenType, chosenPlayer);
 		response = chosenPlayer->CountRequest(chosenCount, chosenType);
-        userInteraction->ShowCountResponse(response, chosenPlayer);
+		//userInteraction->ShowCountResponse(response, chosenPlayer);
 		if(!response)
-			return;
+			return false;
 
 		std::vector<Suit> chosenSuits;
 		std::vector<Suit> suitsBuff = suits;
@@ -140,25 +165,36 @@ void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
 
         userInteraction->ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
 		response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
-        userInteraction->ShowSuitResponse(response, chosenPlayer);
+        //userInteraction->ShowSuitResponse(response, chosenPlayer);
 		if(!response)
-			return;
+			return false;
 
 		for(int i = 0; i < chosenCount; i++){
 			chosenPlayer->Deck().PopCard(chosenType, chosenSuits[i]);
 			Card card(chosenSuits[i], chosenType);
 			deck.AddNewCard(card);
 		}
+
+		if(IsHaveBox() != -1){
+			Type boxType = types[IsHaveBox()];
+			userInteraction->ShowNewBox(boxType, this);
+			for(int i = 0; i < deck.GetSize(); i++){
+				if(deck[i].Type() == boxType){
+					deck.PopCard(deck[i].Type(), deck[i].Suit());
+                    i--;
+				}
+			}
+		}
 	}
+    return false;
 }
 
 //------------------------------------------------------------------------------
 
 ExternalComputerPlayer::ExternalComputerPlayer(){
-
+    boxes = 0;
 }
 
-void ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
+bool ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
-

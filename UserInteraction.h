@@ -21,6 +21,8 @@ class UserInteraction
 
 	virtual void ShowSuitRequest(Type, const std::vector<Suit>&, Player*) = 0;
 	virtual void ShowSuitResponse(bool, Player*) = 0;
+
+	virtual void ShowNewBox(Type, Player*) = 0;
 };
 //---------------------------------------------------------------------------
 class SystemUI : public UserInteraction
@@ -37,6 +39,8 @@ class SystemUI : public UserInteraction
 
 	void ShowSuitRequest(Type, const std::vector<Suit>&, Player*) override;
 	void ShowSuitResponse(bool, Player*) override;
+
+	void ShowNewBox(Type, Player*) override;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -32,6 +32,12 @@ enum Type& Card::Type(){                   		 // Setter method, seted Type
     return type;
 }
 
+bool Card::operator< (Card card){
+	if(type == card.Type())
+        return suit < card.Suit();
+	return type < card.Type();
+
+}
 
 //---------------------------------------------------------------------------
 // Deck methods
@@ -122,4 +128,8 @@ std::vector<Card>::iterator Deck::end(){         // Returned end iterator
 
 std::vector<Card>::reverse_iterator Deck::rend(){        // Returned rend iterator
     return deck.rend();
+}
+
+Card Deck::operator [](int index){
+    return deck[index];
 }

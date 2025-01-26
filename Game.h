@@ -8,6 +8,9 @@
 #include <functional>
 #include <vector>
 #include "Player.h"
+#include "GameUI.h"
+
+//class GameUI;
 
 class Game{                                        // Main Game class
 private:
@@ -15,12 +18,15 @@ private:
 	Player* player2;
 	Player* player3;
 	Player* player4;
+	int currentPlayer;
+    GameUI* gameUI;
 
 public:
 	Game();                                        // Default constructure
 
 	void MainLoop();                               // Main loop
-    void StartGame(Player*, Player*, Player*, Player*);
+	void StartGame(Player*, Player*, Player*, Player*, UserInteraction*, GameUI*);
+    int CheckEndOfGame();
 
 	const Player* Player1() const;                 // Getter method's
 	const Player* Player2() const;

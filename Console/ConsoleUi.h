@@ -2,6 +2,7 @@
 // contains Console UI classes
 
 #include "../UserInteraction.h"
+#include "../GameUI.h"
 
 class ConsoleUI : public UserInteraction {
 
@@ -18,4 +19,14 @@ public:
 
 	void ShowSuitRequest(Type, const std::vector<Suit>&, Player*) override;
 	void ShowSuitResponse(bool, Player*) override;
+
+	void ShowNewBox(Type, Player*) override;
+    void ShowCards(Player*);
+};
+
+class ConsoleGameUI : public GameUI {
+public:
+    ConsoleGameUI();
+	void ShowWin(std::vector<Player*>) override;
+    void ShowWhoseTurnNow(Player*) override;
 };

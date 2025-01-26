@@ -11,14 +11,48 @@ Game::Game() {                                        	  // Default constructure
 }
 
 void Game::MainLoop() {                               // Main loop
+	std::vector<Player*> players = {player1, player2, player3, player4};
 
+	while(true){
+        srand(time(nullptr));
+        gameUI->ShowWhoseTurnNow(players[currentPlayer]);
+		if(players[currentPlayer]->MakeTurn(currentPlayer))
+			break;
+		if(CheckEndOfGame() != -1){
+			int maxCountOfBox = CheckEndOfGame();
+
+            std::vector<Player*> winners;
+
+			for(auto i : players){
+				if(i->Boxes() == maxCountOfBox)
+                    winners.push_back(i);
+			}
+
+			gameUI->ShowWin(winners);
+            break;
+		}
+		currentPlayer = (currentPlayer + 1) % 4;
+	}
 }
 
-void Game::StartGame(Player* player1, Player* player2, Player* player3, Player* player4) {
+void Game::StartGame(Player* player1, Player* player2, Player* player3, Player* player4, UserInteraction* userInteraction, GameUI* gameUI) {
+	player1->UserInteraction() = userInteraction;
+	player2->UserInteraction() = userInteraction;
+	player3->UserInteraction() = userInteraction;
+	player4->UserInteraction() = userInteraction;
+
+    player1->Game() = this;
+	player2->Game() = this;
+	player3->Game() = this;
+	player4->Game() = this;
+
 	this->player1 = player1;
 	this->player2 = player2;
 	this->player3 = player3;
 	this->player4 = player4;
+
+    currentPlayer = 0;
+    this->gameUI = gameUI;
 
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
     std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
@@ -43,6 +77,21 @@ void Game::StartGame(Player* player1, Player* player2, Player* player3, Player* 
 		player3->Deck().AddNewCard(cards[indexOfCards++]);
 		player4->Deck().AddNewCard(cards[indexOfCards++]);
 	}
+}
+
+int Game::CheckEndOfGame(){
+	std::vector<Player*> players = {player1, player2, player3, player4};
+
+	for(auto i : players)
+		if(i->Deck().GetSize() != 0)
+            return -1;
+
+	int maxOfBoxes = 0;
+	for(int i = 0; i < 4; i++)
+		if(players[maxOfBoxes]->Boxes() < players[i]->Boxes())
+			maxOfBoxes = i;
+
+    return maxOfBoxes;
 }
 
 const Player* Game::Player1() const {                 // Getter method's

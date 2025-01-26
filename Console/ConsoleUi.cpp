@@ -1,10 +1,10 @@
 // .cpp file
 // consists ConsoleUI classes
 
-#include <iostream>
 #include "ConsoleUi.h"
-#include "../Player.h"
 #include <string>
+#include <iostream>
+#include <algorithm>
 
 std::string TypeTranslator(Type type){
 	switch(type){
@@ -72,7 +72,7 @@ ConsoleUI::ConsoleUI(){
 }
 
 void ConsoleUI::ShowWhoseTurnNow(Player* player){
-    std::cout << "Сейчас ходит " + player->Name() << '\n';
+    std::cout << "\nСейчас ходит " + player->Name() << '\n';
 }
 
 void ConsoleUI::ShowTypeRequest(Type type, Player* player) {
@@ -82,7 +82,7 @@ void ConsoleUI::ShowTypeRequest(Type type, Player* player) {
 void ConsoleUI::ShowTypeResponse(bool answer, Player* player) {
 	if(answer)
 		std::cout << player->Name() << " говорит, что у него есть карта(ы) этого типа\n";
-	if(answer)
+	else
 		std::cout << player->Name() << " говорит, что у него нет карт этого типа\n";
 }
 
@@ -93,7 +93,7 @@ void ConsoleUI::ShowCountRequest(int count, Type type, Player* player) {
 void ConsoleUI::ShowCountResponse(bool answer, Player* player) {
     if(answer)
 		std::cout << player->Name() << " говорит, что у него именно столько карт этого типа\n";
-	if(answer)
+	else
 		std::cout << player->Name() << " говорит, что у него другое количество карт этого типа\n";
 }
 
@@ -107,6 +107,33 @@ void ConsoleUI::ShowSuitRequest(Type type, const std::vector<Suit>& cards, Playe
 void ConsoleUI::ShowSuitResponse(bool answer, Player* player) {
 	if(answer)
 		std::cout << player->Name() << " говорит, что у него именно эти масти!\n";
-	if(answer)
+	else
 		std::cout << player->Name() << " говорит, что у него другие масти\n";
 }
+
+void ConsoleUI::ShowNewBox(Type type, Player* player){
+    std::cout << player->Name() << " собрал сундочок из " << TypeTranslator(type) << '\n';
+}
+
+void ConsoleUI::ShowCards(Player* player){
+	std::cout << "\nВаши карты: \n";
+    sort(player->Deck().begin(), player->Deck().end());
+	for(auto card : player->Deck()){
+		std::cout << "\t" << TypeTranslator(card.Type()) << ' ' << SuitTranslator(card.Suit()) << '\n';
+	}
+}
+
+
+ConsoleGameUI::ConsoleGameUI() { }
+
+void ConsoleGameUI::ShowWin(std::vector<Player*> players) {
+	std::cout << "\nИгра окончена!\nПобедили: \n";
+	for(auto i : players){
+        std::cout << "\t" << i->Name() << '/n';
+	}
+}
+
+void ConsoleGameUI::ShowWhoseTurnNow(Player* player){
+    std::cout << "\nСейчас ходит: " << player->Name() << '\n';
+}
+

@@ -61,9 +61,9 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>..\c++\CBuilder\GoFish\Console\;$(IncludePath)</IncludePath>
+        <IncludePath>..\;..\c++\CBuilder\GoFish\Console\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
-        <ILINK_LibraryPath>..\c++\CBuilder\GoFish\Console\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\;..\c++\CBuilder\GoFish\Console\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>Project1</SanitizedProjectName>
     </PropertyGroup>
@@ -123,6 +123,14 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\CardAndDeck.cpp">
+            <DependentOn>..\CardAndDeck.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ConsolePlayer.cpp">
+            <DependentOn>ConsolePlayer.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
         <CppCompile Include="ConsoleUi.cpp">
             <BuildOrder>2</BuildOrder>
         </CppCompile>
@@ -136,6 +144,29 @@
             <BuildOrder>0</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <CppCompile Include="..\Game.cpp">
+            <DependentOn>..\Game.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\GameCommands.cpp">
+            <DependentOn>..\GameCommands.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\GameUI.cpp">
+            <DependentOn>..\GameUI.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\GoFish.cpp">
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\Player.cpp">
+            <DependentOn>..\Player.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\UserInteraction.cpp">
+            <DependentOn>..\UserInteraction.h</DependentOn>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
