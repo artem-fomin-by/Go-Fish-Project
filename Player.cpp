@@ -6,6 +6,7 @@
 #include "UserInteraction.h"
 #include <ctime>
 #include <cstdlib>
+#include <algorithm>
 
 Player::Player(){
 
@@ -72,7 +73,7 @@ HumanPlayer::HumanPlayer(){
 
 }
 
-std::vector<GameCommand*> HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
+void HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
 
@@ -91,61 +92,62 @@ void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
     std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
 	while(true){
-		int chosenPlayer = rand() % 3;
+		int chosenPlayerInt = rand() % 3;
 
-		if(chosenPlayer == indexOfPlayer)
-			chosenPlayer++;
+		if(chosenPlayerInt == indexOfPlayer)
+			chosenPlayerInt++;
 
 		Type chosenType = types[rand() % 13];
 		bool response;
-		Player chosenPlayer;
+		Player* chosenPlayer;
 
-        userInteraction.ShowTypeRequest(chosenType, chosenPlayer);
+        userInteraction->ShowTypeRequest(chosenType, chosenPlayer);
 
-		switch (chosenPlayer) {
+		switch (chosenPlayerInt) {
 			case 0:
-				chosenPlayer = Game->Player1();
+				chosenPlayer = game->Player1();
 				break;
 			case 1:
-				chosenPlayer = Game->Player2();
+				chosenPlayer = game->Player2();
 				break;
 			case 2:
-				chosenPlayer = Game->Player3();
+				chosenPlayer = game->Player3();
 				break;
 			case 3:
-				chosenPlayer = Game->Player4();
+				chosenPlayer = game->Player4();
 				break;
 		}
 
-		response = chosenPlayer.TypeRequest(chosenType);
-		userInteraction.ShowTypeResponse(response);
+		response = chosenPlayer->TypeRequest(chosenType);
+		userInteraction->ShowTypeResponse(response, chosenPlayer);
 		if(!response)
 			return;
 
-		userInteraction.ShowCountRequest(chosenCount, chosenType, chosenPlayer);
 		int chosenCount = rand() % 4;
-		response = chosenPlayer.CountRequest(chosenCount, chosenType);
-        userInteraction.ShowCountResponse(response);
+		userInteraction->ShowCountRequest(chosenCount, chosenType, chosenPlayer);
+		response = chosenPlayer->CountRequest(chosenCount, chosenType);
+        userInteraction->ShowCountResponse(response, chosenPlayer);
 		if(!response)
 			return;
 
-		vector<Suit> chosenSuits;
-		vector<Suit> suitsBuff = suits;
+		std::vector<Suit> chosenSuits;
+		std::vector<Suit> suitsBuff = suits;
 
 		std::random_shuffle(suitsBuff.begin(), suitsBuff.end());
 
 		for(int i = 0; i < chosenCount; i++)
-			shosenSuits.push_back(suitsBuff[i]);
+			chosenSuits.push_back(suitsBuff[i]);
 
-        userInteraction.ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
-		response = chosenPlayer.SuitRequest(chosenType, chosenSuits);
-        userInteraction.ShowSuitResponse(response);
+        userInteraction->ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
+		response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
+        userInteraction->ShowSuitResponse(response, chosenPlayer);
 		if(!response)
 			return;
 
 		for(int i = 0; i < chosenCount; i++){
-			chosenPlayer.Deck().PopCard(chosenType, chosenSuits[i]);
-			deck.AddNewCard(chosenType, chosenSuits[i]);
+			chosenPlayer->Deck().PopCard(chosenType, chosenSuits[i]);
+			Card card(chosenSuits[i], chosenType);
+			deck.AddNewCard(card);
 		}
 	}
 }
@@ -156,7 +158,7 @@ ExternalComputerPlayer::ExternalComputerPlayer(){
 
 }
 
-std::vector<GameCommand*> ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
+void ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
 
 }
 

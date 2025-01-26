@@ -14,13 +14,11 @@ class Game;
 //------------------------------------------------------------------------------
 
 class Player{									// abstract class Player
-private:
-	UserInteraction* userInteraction;
+protected:
 	Deck deck;
 	std::string name;
     Game* game;
-
-protected:
+	UserInteraction* userInteraction;
 	Player();                                   // Default constructor, doing nothing
 
 public:
