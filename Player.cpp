@@ -82,8 +82,7 @@ InternalComputerPlayer::InternalComputerPlayer(){
 
 }
 
-void InternalComputerPlayer::MakeTurn(int indexOfPlayer){                    					// Method which do turn of a player
-	std::vector<GameCommand*> commands;
+void InternalComputerPlayer::MakeTurn(int indexOfPlayer){
 	GameCommand* command;
 
     srand(time(nullptr));
@@ -91,35 +90,64 @@ void InternalComputerPlayer::MakeTurn(int indexOfPlayer){                    			
     std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
     std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
-	int chosenPlayer = rand() % 3;
+	while(true){
+		int chosenPlayer = rand() % 3;
 
-	if(chosenPlayer == indexOfPlayer)
-		chosenPlayer++;
+		if(chosenPlayer == indexOfPlayer)
+			chosenPlayer++;
 
-	Type chosenType = types[rand() % 13];
+		Type chosenType = types[rand() % 13];
+		bool response;
+		Player chosenPlayer;
 
-	bool response;
+        userInteraction.ShowTypeRequest(chosenType, chosenPlayer);
 
-	Player chosenPlayer;
+		switch (chosenPlayer) {
+			case 0:
+				chosenPlayer = Game->Player1();
+				break;
+			case 1:
+				chosenPlayer = Game->Player2();
+				break;
+			case 2:
+				chosenPlayer = Game->Player3();
+				break;
+			case 3:
+				chosenPlayer = Game->Player4();
+				break;
+		}
 
-	switch (chosenPlayer) {
-		case 0:
-			chosenPlayer = Game->Player1();
-			break;
-		case 1:
-			chosenPlayer = Game->Player2();
-			break;
-		case 2:
-			chosenPlayer = Game->Player3();
-			break;
-		case 3:
-			chosenPlayer = Game->Player4();
-            break;
+		response = chosenPlayer.TypeRequest(chosenType);
+		userInteraction.ShowTypeResponse(response);
+		if(!response)
+			return;
+
+		userInteraction.ShowCountRequest(chosenCount, chosenType, chosenPlayer);
+		int chosenCount = rand() % 4;
+		response = chosenPlayer.CountRequest(chosenCount, chosenType);
+        userInteraction.ShowCountResponse(response);
+		if(!response)
+			return;
+
+		vector<Suit> chosenSuits;
+		vector<Suit> suitsBuff = suits;
+
+		std::random_shuffle(suitsBuff.begin(), suitsBuff.end());
+
+		for(int i = 0; i < chosenCount; i++)
+			shosenSuits.push_back(suitsBuff[i]);
+
+        userInteraction.ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
+		response = chosenPlayer.SuitRequest(chosenType, chosenSuits);
+        userInteraction.ShowSuitResponse(response);
+		if(!response)
+			return;
+
+		for(int i = 0; i < chosenCount; i++){
+			chosenPlayer.Deck().PopCard(chosenType, chosenSuits[i]);
+			deck.AddNewCard(chosenType, chosenSuits[i]);
+		}
 	}
-
-	response = chosenPlayer->TypeRequest(chosenType);
-	if(!response)
-        return;
 }
 
 //------------------------------------------------------------------------------
