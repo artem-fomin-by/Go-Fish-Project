@@ -82,7 +82,7 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	response = chosenPlayer->TypeRequest(chosenType);
 	//userInteraction->ShowTypeResponse(response, chosenPlayer);
 	if(!response){
-		indexOfPlayer++;
+		indexOfPlayer = (indexOfPlayer + 1) % 4;
 		return false;
 	}
 
@@ -96,7 +96,7 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	response = chosenPlayer->CountRequest(chosenCount, chosenType);
 	//userInteraction->ShowCountResponse(response, chosenPlayer);
 	if(!response){
-		indexOfPlayer++;
+		indexOfPlayer = (indexOfPlayer + 1) % 4;
 		return false;
 	}
 
@@ -125,7 +125,7 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
 	//userInteraction->ShowSuitResponse(response, chosenPlayer);
 	if(!response){
-		indexOfPlayer++;
+		indexOfPlayer = (indexOfPlayer + 1) % 4;
 		return false;
 	}
 
