@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Player::Player(){
-    boxes = 0;
+	boxes = 0;
 }
 
 Player::~Player() {                          		// Default destructor, doing nothing
@@ -99,93 +99,99 @@ Game*& Player::Game(){
 //------------------------------------------------------------------------------
 
 HumanPlayer::HumanPlayer(){
-    boxes = 0;
+	boxes = 0;
 }
 
-bool HumanPlayer::MakeTurn(int){                    					// Method which do turn of a player
+bool HumanPlayer::MakeTurn(int&){                    					// Method which do turn of a player
 
 }
 
 //------------------------------------------------------------------------------
 
 InternalComputerPlayer::InternalComputerPlayer(){
-    boxes = 0;
+	boxes = 0;
 }
 
-bool InternalComputerPlayer::MakeTurn(int indexOfPlayer){
-    srand(time(nullptr));
+bool InternalComputerPlayer::MakeTurn(int& indexOfPlayer){
 
-    std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
-    std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
+	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
+	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
-	while(true){
-		int chosenPlayerInt = rand() % 3;
+//	while(true){
+	int chosenPlayerInt = rand() % 3;
 
-		if(chosenPlayerInt == indexOfPlayer)
-			chosenPlayerInt++;
+	if(chosenPlayerInt == indexOfPlayer)
+		chosenPlayerInt++;
 
-		Type chosenType = types[rand() % 13];
-		bool response;
-		Player* chosenPlayer;
+	Type chosenType = types[rand() % 13];
+	bool response;
+	Player* chosenPlayer;
 
-		switch (chosenPlayerInt) {
-			case 0:
-				chosenPlayer = game->Player1();
-				break;
-			case 1:
-				chosenPlayer = game->Player2();
-				break;
-			case 2:
-				chosenPlayer = game->Player3();
-				break;
-			case 3:
-				chosenPlayer = game->Player4();
-				break;
-		}
-        userInteraction->ShowTypeRequest(chosenType, chosenPlayer);
-		response = chosenPlayer->TypeRequest(chosenType);
-		//userInteraction->ShowTypeResponse(response, chosenPlayer);
-		if(!response)
-			return false;
+	switch (chosenPlayerInt) {
+		case 0:
+			chosenPlayer = game->Player1();
+			break;
+		case 1:
+			chosenPlayer = game->Player2();
+			break;
+		case 2:
+			chosenPlayer = game->Player3();
+			break;
+		case 3:
+			chosenPlayer = game->Player4();
+			break;
+	}
+	userInteraction->ShowTypeRequest(chosenType, chosenPlayer);
+	response = chosenPlayer->TypeRequest(chosenType);
+	//userInteraction->ShowTypeResponse(response, chosenPlayer);
+	if(!response){
+		indexOfPlayer++;
+		return false;
+	}
 
-		int chosenCount = rand() % 4 + 1;
-		userInteraction->ShowCountRequest(chosenCount, chosenType, chosenPlayer);
-		response = chosenPlayer->CountRequest(chosenCount, chosenType);
-		//userInteraction->ShowCountResponse(response, chosenPlayer);
-		if(!response)
-			return false;
 
-		std::vector<Suit> chosenSuits;
-		std::vector<Suit> suitsBuff = suits;
+	int chosenCount = rand() % 3 + 1;
+	userInteraction->ShowCountRequest(chosenCount, chosenType, chosenPlayer);
+	response = chosenPlayer->CountRequest(chosenCount, chosenType);
+	//userInteraction->ShowCountResponse(response, chosenPlayer);
+	if(!response){
+		indexOfPlayer++;
+		return false;
+	}
 
-		std::random_shuffle(suitsBuff.begin(), suitsBuff.end());
+	std::vector<Suit> chosenSuits;
+	std::vector<Suit> suitsBuff = suits;
 
-		for(int i = 0; i < chosenCount; i++)
-			chosenSuits.push_back(suitsBuff[i]);
+	std::random_shuffle(suitsBuff.begin(), suitsBuff.end());
 
-        userInteraction->ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
-		response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
-        //userInteraction->ShowSuitResponse(response, chosenPlayer);
-		if(!response)
-			return false;
+	for(int i = 0; i < chosenCount; i++)
+		chosenSuits.push_back(suitsBuff[i]);
 
-		for(int i = 0; i < chosenCount; i++){
-			chosenPlayer->Deck().PopCard(chosenType, chosenSuits[i]);
-			Card card(chosenSuits[i], chosenType);
-			deck.AddNewCard(card);
-		}
+	userInteraction->ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
+	response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
+	//userInteraction->ShowSuitResponse(response, chosenPlayer);
+	if(!response){
+		indexOfPlayer++;
+		return false;
+	}
 
-		if(IsHaveBox() != -1){
-			Type boxType = types[IsHaveBox()];
-			userInteraction->ShowNewBox(boxType, this);
-			for(int i = 0; i < deck.GetSize(); i++){
-				if(deck[i].Type() == boxType){
-					deck.PopCard(deck[i].Type(), deck[i].Suit());
-                    i--;
-				}
+	for(int i = 0; i < chosenCount; i++){
+		chosenPlayer->Deck().PopCard(chosenType, chosenSuits[i]);
+		Card card(chosenSuits[i], chosenType);
+		deck.AddNewCard(card);
+	}
+
+	if(IsHaveBox() != -1){
+		Type boxType = types[IsHaveBox()];
+		userInteraction->ShowNewBox(boxType, this);
+		for(int i = 0; i < deck.GetSize(); i++){
+			if(deck[i].Type() == boxType){
+				deck.PopCard(deck[i].Type(), deck[i].Suit());
+				i--;
 			}
 		}
 	}
+//	}
     return false;
 }
 
@@ -195,6 +201,6 @@ ExternalComputerPlayer::ExternalComputerPlayer(){
     boxes = 0;
 }
 
-bool ExternalComputerPlayer::MakeTurn(int){                    					// Method which do turn of a player
+bool ExternalComputerPlayer::MakeTurn(int&){                    					// Method which do turn of a player
 
 }

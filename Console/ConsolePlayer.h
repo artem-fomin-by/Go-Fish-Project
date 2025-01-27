@@ -6,5 +6,5 @@
 class ConsoleHumanPlayer : public HumanPlayer {
 public:
     ConsoleHumanPlayer();
-	bool MakeTurn(int) override;                    		// Method which do turn of a player
+	bool MakeTurn(int&) override;                    		// Method which do turn of a player
 };

@@ -19,7 +19,8 @@ private:
 	Player* player3;
 	Player* player4;
 	int currentPlayer;
-    GameUI* gameUI;
+	GameUI* gameUI;
+    //int randomSeed;
 
 public:
 	Game();                                        // Default constructure

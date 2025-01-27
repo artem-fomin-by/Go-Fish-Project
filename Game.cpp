@@ -14,7 +14,7 @@ void Game::MainLoop() {                               // Main loop
 	std::vector<Player*> players = {player1, player2, player3, player4};
 
 	while(true){
-        srand(time(nullptr));
+		//srand(time(nullptr));
         gameUI->ShowWhoseTurnNow(players[currentPlayer]);
 		if(players[currentPlayer]->MakeTurn(currentPlayer))
 			break;
@@ -31,11 +31,12 @@ void Game::MainLoop() {                               // Main loop
 			gameUI->ShowWin(winners);
             break;
 		}
-		currentPlayer = (currentPlayer + 1) % 4;
+		//currentPlayer = (currentPlayer + 1) % 4;
 	}
 }
 
 void Game::StartGame(Player* player1, Player* player2, Player* player3, Player* player4, UserInteraction* userInteraction, GameUI* gameUI) {
+    srand(time(nullptr));
 	player1->UserInteraction() = userInteraction;
 	player2->UserInteraction() = userInteraction;
 	player3->UserInteraction() = userInteraction;

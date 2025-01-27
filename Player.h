@@ -20,12 +20,12 @@ protected:
     Game* game;
 	UserInteraction* userInteraction;
 	Player();							  // Default constructor, doing nothing
-    int boxes;
+	int boxes;
 
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual bool MakeTurn(int) = 0;                // Method which do turn of a player
+	virtual bool MakeTurn(int&) = 0;                // Method which do turn of a player
 	bool TypeRequest(Type);
 	bool CountRequest(int, Type);
 	bool SuitRequest(Type, const std::vector<Suit>&);
@@ -50,7 +50,7 @@ public:
 class HumanPlayer : public Player{      		// HumanPlayer class
 public:
 	HumanPlayer();
-	bool MakeTurn(int) override;                    		// Method which do turn of a player              		// Method which answer the question
+	bool MakeTurn(int&) override;                    		// Method which do turn of a player              		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ public:
 class InternalComputerPlayer : public Player {  // InternalComputerPlayer class
 public:
 	InternalComputerPlayer();
-	bool MakeTurn(int) override;                    		// Method which do turn of a player           		// Method which answer the question
+	bool MakeTurn(int&) override;                    		// Method which do turn of a player           		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ public:
 class ExternalComputerPlayer : public Player { 	// ExternalComputerPlayer class
 public:
 	ExternalComputerPlayer();
-	bool MakeTurn(int) override;                   		 	// Method which do turn of a player     		// Method which answer the question
+	bool MakeTurn(int&) override;                   		 	// Method which do turn of a player     		// Method which answer the question
 };
 #endif
 

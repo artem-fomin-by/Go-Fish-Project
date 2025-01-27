@@ -102,6 +102,7 @@ void ConsoleUI::ShowSuitRequest(Type type, const std::vector<Suit>& cards, Playe
 	for(int i = 0; i < cards.size(); i++){
         std::cout << SuitTranslator(cards[i]) << ", ";
 	}
+    std::cout << "\n";
 }
 
 void ConsoleUI::ShowSuitResponse(bool answer, Player* player) {
@@ -129,11 +130,11 @@ ConsoleGameUI::ConsoleGameUI() { }
 void ConsoleGameUI::ShowWin(std::vector<Player*> players) {
 	std::cout << "\nИгра окончена!\nПобедили: \n";
 	for(auto i : players){
-        std::cout << "\t" << i->Name() << '/n';
+        std::cout << "\t" << i->Name() << '\n';
 	}
 }
 
 void ConsoleGameUI::ShowWhoseTurnNow(Player* player){
-    std::cout << "\nСейчас ходит: " << player->Name() << '\n';
+    std::cout << "\nСейчас ходит: " << player->Name() << "\n";
 }
 

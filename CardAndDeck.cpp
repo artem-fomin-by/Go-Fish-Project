@@ -57,7 +57,7 @@ void Deck::AddNewCard(Card card){        		 // Push new card to Deck
 }
 
 int Deck::GetSize(){                     		 // Returned size of deck
-	return size;
+	return deck.size();
 }
 
 std::vector<Card> Deck::GetDeck(){            	 // Returned vector of cards
@@ -69,21 +69,21 @@ Card Deck::FindCardByIndex(int index){         	 // Returned card by index
 }
 
 int Deck::FindCardBySuit(Suit suit){          	 // Returned first index of card with taken suit or -1 else
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < deck.size(); i++)
 		if(deck[i].Suit() == suit)
 			return i;
 	return -1;
 }
 
 int Deck::FindCardByType(Type type){              // Returned first index of card with taken type and -1 else
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < deck.size(); i++)
 		if(deck[i].Type() == type)
 			return i;
     return -1;
 }
 
 int Deck::HaveCardWithTypeAndSuit(Type type, Suit suit){  // Returned -1, if deck hasn't a card with taken type and suit and index of a card if else
-    for(int i = 0; i < size; i++)
+    for(int i = 0; i < deck.size(); i++)
 		if(deck[i].Type() == type && deck[i].Suit() == suit)
 			return i;
     return -1;
@@ -91,7 +91,7 @@ int Deck::HaveCardWithTypeAndSuit(Type type, Suit suit){  // Returned -1, if dec
 
 int Deck::CountOfCardsWithSuit(Suit suit){       // Returned count of cards with taken suit
 	int count = 0;
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < deck.size(); i++)
 		if(deck[i].Suit() == suit)
 			count++;
     return count;
@@ -99,19 +99,20 @@ int Deck::CountOfCardsWithSuit(Suit suit){       // Returned count of cards with
 
 int Deck::CountOfCardsWithType(Type type){       // Returned count of cards with taken type
     int count = 0;
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < deck.size(); i++)
 		if(deck[i].Type() == type)
 			count++;
     return count;
 }
 
 void Deck::PopCard(Type type, Suit suit){        // Pop card with taken type and suit
-	for(int i = 0; i < size; i++){
+	for(int i = 0; i < deck.size(); i++){
 		if(deck[i].Suit() == suit && deck[i].Type() == type){
 			deck.erase(deck.begin() + i);
             return;
 		}
 	}
+    size--;
 }
 
 std::vector<Card>::iterator Deck::begin(){       // Returned begin iterator
