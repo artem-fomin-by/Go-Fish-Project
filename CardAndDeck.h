@@ -44,7 +44,8 @@ public:
 	enum Suit& Suit();                                    // Setter method, seted Suit
 	const Type& Type() const;              		 	 // Getter method, returned Type
 	enum Type& Type();                                    // Setter method, seted Type
-    bool operator< (Card);
+	bool operator< (Card);
+    bool operator== (Card);
 };
 
 class Deck{                            		 		 // Deck class
@@ -59,6 +60,7 @@ public:
 	Deck(std::vector<Card>);          		 	 	 // Takes vector of
 													 // Cards and initialize private fields
 	void AddNewCard(Card);
+    void AddNewCard(Type, Suit);
 	int GetSize();                     		 		 // Returned size of deck
 	std::vector<Card> GetDeck();             		 // Returned vector of cards
 	Card FindCardByIndex(int);         		 		 // Returned card by index
@@ -68,11 +70,13 @@ public:
 	int CountOfCardsWithSuit(Suit);          		 // Returned count of cards with taken suit
 	int CountOfCardsWithType(Type);          		 // Returned count of cards with taken type
 	void PopCard(Type, Suit);
+    void PopCard(Card);
 	std::vector<Card>::iterator begin();     		 // Returned begin iterator
 	std::vector<Card>::reverse_iterator rbegin();    // Returned rbegin iterator
 	std::vector<Card>::iterator end();         		 // Returned end iterator
 	std::vector<Card>::reverse_iterator rend();      // Returned rend iterator
-    Card operator[](int);
+	Card operator[](int);
+	bool operator== (Deck);
 };
 #endif
 

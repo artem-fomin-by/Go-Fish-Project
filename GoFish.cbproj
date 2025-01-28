@@ -202,6 +202,10 @@
             <BuildOrder>1</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <CppCompile Include="Intellegence.cpp">
+            <DependentOn>Intellegence.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Player.cpp">
             <DependentOn>Player.h</DependentOn>
             <BuildOrder>3</BuildOrder>
