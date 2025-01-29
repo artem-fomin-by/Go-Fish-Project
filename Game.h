@@ -12,6 +12,8 @@
 
 //class GameUI;
 
+class GameUI;
+
 class Game{                                        // Main Game class
 private:
 	Player* player1;

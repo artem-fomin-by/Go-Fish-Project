@@ -5,6 +5,7 @@
 #include "ConsolePlayer.h"
 #include <string>
 #include <windows.h>
+#include "Intellegence.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
