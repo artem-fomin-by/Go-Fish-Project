@@ -204,6 +204,7 @@ bool InternalComputerPlayer::MakeTurn(int& indexOfPlayer){
 	}
 
 	if(IsHaveBox() != -1){
+        box++;
 		Type boxType = types[IsHaveBox()];
 		userInteraction->ShowNewBox(boxType, this);
 

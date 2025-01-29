@@ -130,7 +130,7 @@ ConsoleGameUI::ConsoleGameUI() { }
 void ConsoleGameUI::ShowWin(std::vector<Player*> players) {
 	std::cout << "\nИгра окончена!\nПобедили: \n";
 	for(auto i : players){
-        std::cout << "\t" << i->Name() << '\n';
+        std::cout << "\t" << i->Name() << ", " << i->Boxes() << " Сундучков" << '\n';
 	}
 }
 
