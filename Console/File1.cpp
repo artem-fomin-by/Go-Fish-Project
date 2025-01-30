@@ -44,5 +44,4 @@ int _tmain(int argc, _TCHAR* argv[])
         game->MainLoop();
 	}
     std::system("pause");
-    std::cin >> buff;
 }
