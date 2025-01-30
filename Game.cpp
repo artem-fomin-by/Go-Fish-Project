@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <algorithm>
 #include "Intellegence.h"
-#include "Unit2.h"
 
 Game::Game() {                                        	  // Default constructure
 
@@ -89,7 +88,6 @@ int Game::CheckEndOfGame(){
 
 	for(auto i : players)
 		if(i->Deck().GetSize() != 0){
-            fout << "ENDOFGAME NONE BECAUSE: " << i->Name() << '\n';
 			return -1;
 		}
 

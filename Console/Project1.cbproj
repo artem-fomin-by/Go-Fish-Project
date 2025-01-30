@@ -144,10 +144,6 @@
             <BuildOrder>0</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Unit2.cpp">
-            <DependentOn>Unit2.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
-        </CppCompile>
         <CppCompile Include="..\Game.cpp">
             <DependentOn>..\Game.h</DependentOn>
             <BuildOrder>6</BuildOrder>

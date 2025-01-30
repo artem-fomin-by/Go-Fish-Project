@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
-#include "Unit2.h"
 
 int min(int a, int b){
 	if(a < b)
@@ -334,82 +333,6 @@ int& Intellegence::Me() {
 
 Turn Intellegence::MakeTurnEasy(){
 
-	fout << "peopleHave\n";
-	fout << "------------------------------------------------------------------\n\n";
-
-	for(auto i : peopleHave){
-		for(auto j : i){
-			fout << j.Type() << ' ' << j.Suit() << '\n';
-		}
-		fout << '\n';
-	}
-
-	fout << "\n------------------------------------------------------------------\n";
-
-	fout << "peopleDontHave\n";
-	fout << "------------------------------------------------------------------\n\n";
-
-	for(auto i : peopleDontHave){
-		for(auto j : i){
-			fout << j.Type() << ' ' << j.Suit() << '\n';
-		}
-		fout << '\n';
-	}
-
-	fout << "\n------------------------------------------------------------------\n";
-
-
-	fout << "MyDeck\n";
-	fout << "------------------------------------------------------------------\n\n";
-
-	for(auto j : myDeck){
-		fout << j.Type() << ' ' << j.Suit() << '\n';
-	}
-	fout << "\n------------------------------------------------------------------\n";
-
-	fout << "enableTypes\n";
-	fout << "------------------------------------------------------------------\n\n";
-
-	for(int i = 0; i < 13; i++){
-		fout << i << " - " << enableTypes[i] << '\n';
-	}
-	fout << "\n------------------------------------------------------------------\n";
-
-	fout << "peopleCanHaveType\n";
-
-    fout << "-------------------------------------------------------------\n";
-
-	for(int i = 0; i < 4; i++){
-		for(int j = 0; j < 13; j++){
-			fout << j << " - ";
-			fout << peopleCanHaveType[i][j];
-			fout << '\n';
-		}
-		fout << "\n";
-	}
-
-	fout << "-------------------------------------------------------------\n";
-
-
-	fout << "ñountCardByType\n";
-
-	fout << "-------------------------------------------------------------\n";
-
-	for(int i = 0; i < 4; i++){
-		for(int j = 0; j < 13; j++){
-			fout << j << " - ";
-			for(auto z : ñountCardByType[i][j]){
-				fout << z << ' ';
-			}
-			fout << '\n';
-		}
-		fout << "\n";
-	}
-
-	fout << "-------------------------------------------------------------\n";
-
-
-
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
 	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
@@ -497,10 +420,7 @@ Turn Intellegence::MakeTurnEasy(){
 		int t = rand() % 13;
 		while(!enableTypes[t]) t = (t + 1) % 13;
         turn.type = types[t];
-    }
-
-	fout << turn.type << '\n';
-    std::cout << turn.type << '\n';
+	}
 
 	std::vector<int> players(4, 1);
 
@@ -516,8 +436,6 @@ Turn Intellegence::MakeTurnEasy(){
 	int i = rand() % 4;
 	while(!players[i]) i = (i + 1) % 4;
 	turn.player = i;
-	fout << turn.player << ' ' << turn.type << ' ' << '\n';
-    std::cout << turn.player << ' ' << turn.type << ' ' << '\n';
 
 	if(ñountCardByType[turn.player][turn.type].size() == 0)
 		turn.count = rand() % 3 + 1;
@@ -566,9 +484,6 @@ Turn Intellegence::MakeTurnEasy(){
 	}
 
 	else{
-
-        std::cout << turn.player << ' ' << turn.type << ' ' << turn.count << '\n';
-
 		std::vector<int> mask(suitsBuff.size() + 1, 0);
 		std::vector<Deck> combinations;
 		while(!mask[0]){
@@ -599,7 +514,6 @@ Turn Intellegence::MakeTurnEasy(){
                 mask[i] = 1;
 			}
 		}
-		std::cout << combinations.size() << '\n';
 		if(combinations.size() != 1)
 		for(auto deck : combinationsPeopleCantHave[turn.player]){
 			auto it = find(combinations.begin(), combinations.end(), deck);

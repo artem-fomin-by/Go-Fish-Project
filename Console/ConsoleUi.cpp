@@ -5,7 +5,6 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include "Unit2.h"
 
 std::string TypeTranslator(Type type){
 	switch(type){
@@ -74,12 +73,10 @@ ConsoleUI::ConsoleUI(){
 
 void ConsoleUI::ShowWhoseTurnNow(Player* player){
 	std::cout << "\nСейчас ходит " + player->Name() << '\n';
-	fout << "\nСейчас ходит " + player->Name() << '\n';
 }
 
 void ConsoleUI::ShowTypeRequest(Type type, Player* player) {
 	std::cout << "Спрашивает есть ли у " << player->Name() << " " << TypeTranslator(type) << '\n';
-    fout << "Спрашивает есть ли у " << player->Name() << " " << TypeTranslator(type) << '\n';
 }
 
 void ConsoleUI::ShowTypeResponse(bool answer, Player* player) {
@@ -87,15 +84,10 @@ void ConsoleUI::ShowTypeResponse(bool answer, Player* player) {
 		std::cout << player->Name() << " говорит, что у него есть карта(ы) этого типа\n";
 	else
 		std::cout << player->Name() << " говорит, что у него нет карт этого типа\n";
-	if(answer)
-		fout << player->Name() << " говорит, что у него есть карта(ы) этого типа\n";
-	else
-		fout << player->Name() << " говорит, что у него нет карт этого типа\n";
 }
 
 void ConsoleUI::ShowCountRequest(int count, Type type, Player* player) {
 	std::cout << "Спрашивает у " << player->Name() << ", у него " << std::to_string(count) << ' ' << TypeTranslator(type) << '\n';
-    fout << "Спрашивает у " << player->Name() << ", у него " << std::to_string(count) << ' ' << TypeTranslator(type) << '\n';
 }
 
 void ConsoleUI::ShowCountResponse(bool answer, Player* player) {
@@ -103,10 +95,6 @@ void ConsoleUI::ShowCountResponse(bool answer, Player* player) {
 		std::cout << player->Name() << " говорит, что у него именно столько карт этого типа\n";
 	else
 		std::cout << player->Name() << " говорит, что у него другое количество карт этого типа\n";
-	if(answer)
-		fout << player->Name() << " говорит, что у него именно столько карт этого типа\n";
-	else
-		fout << player->Name() << " говорит, что у него другое количество карт этого типа\n";
 }
 
 void ConsoleUI::ShowSuitRequest(Type type, const std::vector<Suit>& cards, Player* player) {
@@ -115,11 +103,6 @@ void ConsoleUI::ShowSuitRequest(Type type, const std::vector<Suit>& cards, Playe
         std::cout << SuitTranslator(cards[i]) << ", ";
 	}
 	std::cout << "\n";
-	fout << "Спрашивает у " << player->Name() << ", у него ";
-	for(int i = 0; i < cards.size(); i++){
-		fout << SuitTranslator(cards[i]) << ", ";
-	}
-    fout << "\n";
 }
 
 void ConsoleUI::ShowSuitResponse(bool answer, Player* player) {
@@ -127,15 +110,10 @@ void ConsoleUI::ShowSuitResponse(bool answer, Player* player) {
 		std::cout << player->Name() << " говорит, что у него именно эти масти!\n";
 	else
 		std::cout << player->Name() << " говорит, что у него другие масти\n";
-	if(answer)
-		fout << player->Name() << " говорит, что у него именно эти масти!\n";
-	else
-		fout << player->Name() << " говорит, что у него другие масти\n";
 }
 
 void ConsoleUI::ShowNewBox(Type type, Player* player){
 	std::cout << player->Name() << " собрал сундучок из " << TypeTranslator(type) << '\n';
-	fout << player->Name() << " собрал сундучок из " << TypeTranslator(type) << '\n';
 }
 
 void ConsoleUI::ShowCards(Player* player){
@@ -143,10 +121,6 @@ void ConsoleUI::ShowCards(Player* player){
     sort(player->Deck().begin(), player->Deck().end());
 	for(auto card : player->Deck()){
 		std::cout << "\t" << TypeTranslator(card.Type()) << ' ' << SuitTranslator(card.Suit()) << '\n';
-	}
-	fout << "\nВаши карты: \n";
-	for(auto card : player->Deck()){
-		fout << "\t" << TypeTranslator(card.Type()) << ' ' << SuitTranslator(card.Suit()) << '\n';
 	}
 }
 
@@ -158,14 +132,9 @@ void ConsoleGameUI::ShowWin(std::vector<Player*> players) {
 	for(auto i : players){
         std::cout << "\t" << i->Name() << ", " << i->Boxes() << " Сундучков" << '\n';
 	}
-	fout << "\nИгра окончена!\nПобедили: \n";
-	for(auto i : players){
-        fout << "\t" << i->Name() << ", " << i->Boxes() << " Сундучков" << '\n';
-	}
 }
 
 void ConsoleGameUI::ShowWhoseTurnNow(Player* player){
 	std::cout << "\nСейчас ходит: " << player->Name() << "\n";
-    fout << "\nСейчас ходит: " << player->Name() << "\n";
 }
 

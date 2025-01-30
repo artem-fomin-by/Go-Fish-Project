@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <iostream>
 #include <ConsoleUi.cpp>
-#include "Unit2.h"
 
 ConsoleHumanPlayer::ConsoleHumanPlayer() {
     boxes = 0;
@@ -48,19 +47,15 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 
 	int counter = 1;
 	std::cout << '\n';
-	fout << '\n';
 	for(int i = 0; i < 4; i++){
 		if(indexOfPlayer == i)
 			continue;
 		std::cout << counter++ << " - " << players[i]->Name() << '\n';
-		fout << counter << " - " << players[i]->Name() << '\n';
 	}
 	std::cout << '\n';
-	fout << '\n';
 
 	while(chosenPlayerInt >= 4){
 		std::cout << "Введите номер игрока, которого хотите выбрать: ";
-		fout << "Введите номер игрока, которого хотите выбрать: ";
 		std::cin >> chosenPlayerInt;
 	}
 
@@ -70,20 +65,16 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 		chosenPlayerInt++;
 
 	std::cout << '\n';
-	fout << '\n';
 	for(int i = 0; i < 13; i++){
 		std::cout << i + 1 << " - " << TypeTranslator(types[i]) << '\n';
-		fout << i + 1 << " - " << TypeTranslator(types[i]) << '\n';
 	}
 	std::cout << '\n';
-	fout << '\n';
 
 	int chosenTypeInt = 14;
 
 	while(chosenTypeInt > 13){
 		std::cout << "Введите номер типа, про который вы хотите спросить: ";
-        fout << "Введите номер типа, про который вы хотите спросить: ";
-		std::cin >> chosenTypeInt;
+        std::cin >> chosenTypeInt;
 	}
 	chosenTypeInt--;
 
@@ -124,7 +115,6 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	int chosenCount = 5;
 	while(chosenCount > 4) {
 		std::cout << "Введите количетво карт: ";
-		fout << "Введите количетво карт: ";
 		std::cin >> chosenCount;
 	}
 	//chosenCount--;
@@ -148,19 +138,12 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	}
 	std::cout << '\n';
 
-	fout << '\n';
-	for(int i = 0; i < 4; i++){
-		fout << i + 1 << " - " << SuitTranslator(suits[i]) << '\n';
-	}
-	fout << '\n';
-
 	std::vector<Suit> chosenSuits;
 	std::vector<int> chosenSuitsInt;
 
 	for(int i = 0; i < chosenCount; i++){
 		int nextChoise = 5;
 		while(nextChoise > 4 && find(chosenSuitsInt.begin(), chosenSuitsInt.end(), nextChoise) == chosenSuitsInt.end()){
-			fout << "Выберите номер масти: ";
 			std::cout << "Выберите номер масти: ";
 			std::cin >> nextChoise;
 		}

@@ -6,7 +6,6 @@
 #include <string>
 #include <windows.h>
 #include "Intellegence.h"
-#include "Unit2.h"
 #include <ctime>
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -24,26 +23,18 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	std::string path = "logs/" + s1 + "." + s2 + "." + s3 + "_" + s4 + "-" + s5 + "-" + s6 + ".txt";
 
-    fout << path;
-
-	fout.close();
-
-	fout.open(path);
-
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
 	std::string buff;
 
 	while(true){
 		while(buff != "д" && buff != "н"){
-			fout << "’отите сыграть(д/н): ";
 			std::cout << "’отите сыграть(д/н): ";
 			std::cin >> buff;
 		}
 		if(buff == "н")
 			break;
 
-		fout << "¬ведите ваше им€: ";
 		std::cout << "¬ведите ваше им€: ";
 		std::cin >> buff;
 
