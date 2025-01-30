@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include "Intellegence.h"
+#include "Unit2.h"
 
 Game::Game() {                                        	  // Default constructure
 
@@ -20,16 +21,7 @@ void Game::MainLoop() {                               // Main loop
 		if(players[currentPlayer]->MakeTurn(currentPlayer))
 			break;
 		if(CheckEndOfGame() != -1){
-			int maxCountOfBox = CheckEndOfGame();
-
-            std::vector<Player*> winners;
-
-			for(auto i : players){
-				if(i->Boxes() == maxCountOfBox)
-                    winners.push_back(i);
-			}
-
-			gameUI->ShowWin(winners);
+			gameUI->ShowWin(players);
             break;
 		}
 		//currentPlayer = (currentPlayer + 1) % 4;
@@ -96,8 +88,10 @@ int Game::CheckEndOfGame(){
 	std::vector<Player*> players = {player1, player2, player3, player4};
 
 	for(auto i : players)
-		if(i->Deck().GetSize() != 0)
-            return -1;
+		if(i->Deck().GetSize() != 0){
+            fout << "ENDOFGAME NONE BECAUSE: " << i->Name() << '\n';
+			return -1;
+		}
 
 	int maxOfBoxes = 0;
 	for(int i = 0; i < 4; i++)

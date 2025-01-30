@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include "Unit2.h"
 
 int min(int a, int b){
 	if(a < b)
@@ -76,8 +77,17 @@ Intellegence::Intellegence(int me, Deck deck) {
 
 void Intellegence::registrateTypeResponse(int player, Type type, bool response) {
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
-	if(response || player == me) {
-		return;
+	if(player == me)
+        return;
+	if(response) {
+		for(int i = 0; i < 4; i++){
+			if(me == i || i == player)
+				continue;
+            auto it = find(ñountCardByType[i][type].begin(), ñountCardByType[i][type].end(), 3);
+			if(it != ñountCardByType[i][type].end()){
+                ñountCardByType[i][type].erase(it);
+			}
+		}
 	}
 	else {
         peopleCanHaveType[player][type] = 0;
@@ -152,7 +162,17 @@ void Intellegence::registrateCountResponse(int player, Type type, int count, boo
 			}
 		}
 		ñountCardByType[player][type].clear();
-        ñountCardByType[player][type].push_back(count);
+		ñountCardByType[player][type].push_back(count);
+
+		int maxAnother = 3 - count;
+
+		for(int i = 0; i < 4; i++){
+			if(i == me || i == player)
+                continue;
+			while(ñountCardByType[i][type].size() > 0 && *ñountCardByType[i][type].rbegin() > maxAnother)
+                ñountCardByType[i][type].pop_back();
+		}
+
 	}
 	else{
     	auto it = find(ñountCardByType[player][type].begin(), ñountCardByType[player][type].end(), count);
@@ -164,17 +184,18 @@ void Intellegence::registrateCountResponse(int player, Type type, int count, boo
 void Intellegence::registrateSuitResponse(int player1, int player2, Type type, int count, std::vector<Suit> suit, bool response){
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
 	if(response){
+		peopleCanHaveType[player1][type] = 0;
+		peopleCanHaveType[player2][type] = 1;
 		if(player1 != me) {
-			peopleCanHaveType[player1][type] = 0;
-            peopleCanHaveType[player2][type] = 1;
 			for(int i = 0; i < suit.size(); i++){
 				if(peopleHave[player1].HaveCardWithTypeAndSuit(type, suit[i]) != -1){
-					peopleHave[player1].PopCard(type, suit[i - 1]);
+					peopleHave[player1].PopCard(type, suit[i]);
 				}
 				if(peopleCanHave[player1].HaveCardWithTypeAndSuit(type, suit[i]) != -1){
-					peopleCanHave[player1].PopCard(type, suit[i - 1]);
+					peopleCanHave[player1].PopCard(type, suit[i]);
 				}
-				peopleDontHave[player1].AddNewCard(type, suit[i - 1]);
+				if(peopleDontHave[player1].HaveCardWithTypeAndSuit(type, suit[i]) == -1)
+					peopleDontHave[player1].AddNewCard(type, suit[i]);
 			}
 			ñountCardByType[player1][type].clear();
 			std::vector<int> mask(5, 0);
@@ -210,12 +231,13 @@ void Intellegence::registrateSuitResponse(int player1, int player2, Type type, i
 		if(player2 != me){
 			for(int i = 0; i < suit.size(); i++){
 				if(peopleDontHave[player2].HaveCardWithTypeAndSuit(type, suit[i]) != -1){
-					peopleDontHave[player2].PopCard(type, suit[i - 1]);
+					peopleDontHave[player2].PopCard(type, suit[i]);
 				}
 				if(peopleCanHave[player2].HaveCardWithTypeAndSuit(type, suit[i]) != -1){
-					peopleCanHave[player2].PopCard(type, suit[i - 1]);
+					peopleCanHave[player2].PopCard(type, suit[i]);
 				}
-				peopleHave[player2].AddNewCard(type, suit[i - 1]);
+				if(peopleHave[player2].HaveCardWithTypeAndSuit(type, suit[i]) == -1)
+					peopleHave[player2].AddNewCard(type, suit[i]);
 			}
 
 			int maxCount = *ñountCardByType[player2][type].rbegin();
@@ -225,7 +247,7 @@ void Intellegence::registrateSuitResponse(int player1, int player2, Type type, i
 
 			for(int i = 0; i < combinationsPeopleCantHave[player2].size(); i++){
 				for(int j = 0; j < suit.size(); j++){
-					if(combinationsPeopleCantHave[player2][i].HaveCardWithTypeAndSuit(type, suit[i]) != -1){
+					if(combinationsPeopleCantHave[player2][i].HaveCardWithTypeAndSuit(type, suit[j]) != -1){
 						combinationsPeopleCantHave[player2].erase(combinationsPeopleCantHave[player2].begin() + i);
 						i--;
 						break;
@@ -236,13 +258,23 @@ void Intellegence::registrateSuitResponse(int player1, int player2, Type type, i
 		else
 			for(int i = 0; i < suit.size(); i++)
 				myDeck.AddNewCard(type, suit[i]);
+
+		for(int i = 0; i < 4; i++){
+			if(i == me || i == player1 || i == player2)
+				continue;
+			for(auto s : suit){
+				if(peopleDontHave[i].HaveCardWithTypeAndSuit(type, s) == -1)
+                    peopleDontHave[i].AddNewCard(type, s);
+			}
+		}
 	}
 
 	else{
 		if(me == player1)
 			return;
 		if(suit.size() == 1){
-			peopleDontHave[player1].AddNewCard(type, suit[0]);
+			if(peopleDontHave[player1].HaveCardWithTypeAndSuit(type, suit[0]) == -1)
+				peopleDontHave[player1].AddNewCard(type, suit[0]);
 			if(peopleCanHave[player1].HaveCardWithTypeAndSuit(type, suit[0]) != -1){
 				peopleCanHave[player1].PopCard(type, suit[0]);
 			}
@@ -269,22 +301,26 @@ void Intellegence::registrateNewChest(int player, Type type){
 		}
 	}
 
-	for(auto suit : suits) {
-		if(peopleHave[player].HaveCardWithTypeAndSuit(type, suit) != -1)
-            peopleHave[player].PopCard(type, suit);
-		if(peopleCanHave[player].HaveCardWithTypeAndSuit(type, suit) != -1)
-            peopleCanHave[player].PopCard(type, suit);
-		if(peopleDontHave[player].HaveCardWithTypeAndSuit(type, suit) == -1)
-            peopleDontHave[player].AddNewCard(type, suit);
-        cardInGame.PopCard(type, suit);
-	}
-	ñountCardByType[player][type].clear();
-
-	for(int i = 0; i < combinationsPeopleCantHave[player].size(); i++){
-		if(combinationsPeopleCantHave[player][i].FindCardByType(type) != -1){
-			combinationsPeopleCantHave[player].erase(combinationsPeopleCantHave[player].begin() + i);
-            i--;
+	for(int p = 0; p < 4; p++){
+		for(auto suit : suits) {
+			if(peopleHave[p].HaveCardWithTypeAndSuit(type, suit) != -1)
+				peopleHave[p].PopCard(type, suit);
+			if(peopleCanHave[p].HaveCardWithTypeAndSuit(type, suit) != -1)
+				peopleCanHave[p].PopCard(type, suit);
+			if(peopleDontHave[p].HaveCardWithTypeAndSuit(type, suit) == -1)
+				peopleDontHave[p].AddNewCard(type, suit);
 		}
+		ñountCardByType[p][type].clear();
+		for(int i = 0; i < combinationsPeopleCantHave[p].size(); i++){
+			if(combinationsPeopleCantHave[p][i].FindCardByType(type) != -1){
+				combinationsPeopleCantHave[p].erase(combinationsPeopleCantHave[p].begin() + i);
+				i--;
+			}
+		}
+	}
+
+    for(auto suit : suits) {
+        cardInGame.PopCard(type, suit);
 	}
 }
 
@@ -297,10 +333,87 @@ int& Intellegence::Me() {
 }
 
 Turn Intellegence::MakeTurnEasy(){
+
+	fout << "peopleHave\n";
+	fout << "------------------------------------------------------------------\n\n";
+
+	for(auto i : peopleHave){
+		for(auto j : i){
+			fout << j.Type() << ' ' << j.Suit() << '\n';
+		}
+		fout << '\n';
+	}
+
+	fout << "\n------------------------------------------------------------------\n";
+
+	fout << "peopleDontHave\n";
+	fout << "------------------------------------------------------------------\n\n";
+
+	for(auto i : peopleDontHave){
+		for(auto j : i){
+			fout << j.Type() << ' ' << j.Suit() << '\n';
+		}
+		fout << '\n';
+	}
+
+	fout << "\n------------------------------------------------------------------\n";
+
+
+	fout << "MyDeck\n";
+	fout << "------------------------------------------------------------------\n\n";
+
+	for(auto j : myDeck){
+		fout << j.Type() << ' ' << j.Suit() << '\n';
+	}
+	fout << "\n------------------------------------------------------------------\n";
+
+	fout << "enableTypes\n";
+	fout << "------------------------------------------------------------------\n\n";
+
+	for(int i = 0; i < 13; i++){
+		fout << i << " - " << enableTypes[i] << '\n';
+	}
+	fout << "\n------------------------------------------------------------------\n";
+
+	fout << "peopleCanHaveType\n";
+
+    fout << "-------------------------------------------------------------\n";
+
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 13; j++){
+			fout << j << " - ";
+			fout << peopleCanHaveType[i][j];
+			fout << '\n';
+		}
+		fout << "\n";
+	}
+
+	fout << "-------------------------------------------------------------\n";
+
+
+	fout << "ñountCardByType\n";
+
+	fout << "-------------------------------------------------------------\n";
+
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 13; j++){
+			fout << j << " - ";
+			for(auto z : ñountCardByType[i][j]){
+				fout << z << ' ';
+			}
+			fout << '\n';
+		}
+		fout << "\n";
+	}
+
+	fout << "-------------------------------------------------------------\n";
+
+
+
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
 	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
-    Turn turn;
+	Turn turn;
 
 	std::vector<std::vector<Type>> counter(4);
 
@@ -355,7 +468,7 @@ Turn Intellegence::MakeTurnEasy(){
 				}
 				for(auto card : peopleHave[p]) {
 					if(t == card.Type()){
-						suitsBuff.push_back(card.Suit());
+						turn.suit.push_back(card.Suit());
 					}
 				}
                 return turn;
@@ -382,10 +495,12 @@ Turn Intellegence::MakeTurnEasy(){
 	}
 	else{
 		int t = rand() % 13;
-        while(!enableTypes[t]) t = (t + 1) % 13;
+		while(!enableTypes[t]) t = (t + 1) % 13;
+        turn.type = types[t];
     }
 
-	//std::cout << turn.type << '\n';
+	fout << turn.type << '\n';
+    std::cout << turn.type << '\n';
 
 	std::vector<int> players(4, 1);
 
@@ -401,24 +516,13 @@ Turn Intellegence::MakeTurnEasy(){
 	int i = rand() % 4;
 	while(!players[i]) i = (i + 1) % 4;
 	turn.player = i;
-//	std::cout << turn.player << ' ' << turn.type << ' ' << '\n';
-//
-//	std::cout << "-------------------------------------------------------------\n";
-//
-//	for(int i = 0; i < 4; i++){
-//		for(int j = 0; j < 13; j++){
-//			std::cout << j << " - ";
-//			for(auto z : ñountCardByType[i][j]){
-//				std::cout << z << ' ';
-//			}
-//			std::cout << '\n';
-//		}
-//		std::cout << "\n";
-//	}
-//
-//	std::cout << "-------------------------------------------------------------\n";
+	fout << turn.player << ' ' << turn.type << ' ' << '\n';
+    std::cout << turn.player << ' ' << turn.type << ' ' << '\n';
 
-	turn.count = ñountCardByType[turn.player][turn.type][rand() % ñountCardByType[turn.player][turn.type].size()];
+	if(ñountCardByType[turn.player][turn.type].size() == 0)
+		turn.count = rand() % 3 + 1;
+	else
+		turn.count = ñountCardByType[turn.player][turn.type][rand() % ñountCardByType[turn.player][turn.type].size()];
 
 	std::vector<Suit> suitsBuff = suits;
 	int tcount = turn.count;
@@ -455,13 +559,16 @@ Turn Intellegence::MakeTurnEasy(){
 		}
 		for(auto card : peopleHave[turn.player]) {
 			if(turn.type == card.Type()){
-				suitsBuff.push_back(card.Suit());
+				turn.suit.push_back(card.Suit());
 			}
 		}
 		return turn;
 	}
 
 	else{
+
+        std::cout << turn.player << ' ' << turn.type << ' ' << turn.count << '\n';
+
 		std::vector<int> mask(suitsBuff.size() + 1, 0);
 		std::vector<Deck> combinations;
 		while(!mask[0]){
@@ -492,16 +599,42 @@ Turn Intellegence::MakeTurnEasy(){
                 mask[i] = 1;
 			}
 		}
+		std::cout << combinations.size() << '\n';
+		if(combinations.size() != 1)
 		for(auto deck : combinationsPeopleCantHave[turn.player]){
 			auto it = find(combinations.begin(), combinations.end(), deck);
 			if(it != combinations.end()){
 				combinations.erase(it);
 			}
 		}
-		int random = rand() % combinations.size();
 
-		for(auto card : combinations[random]){
-			turn.suit.push_back(card.Suit());
+		if(combinations.size() == 0){
+			for(auto card : peopleHave[turn.player]) {
+                if(turn.suit.size() == turn.count) break;
+				if(turn.type == card.Type()){
+					turn.suit.push_back(card.Suit());
+				}
+			}
+			suitsBuff = suits;
+			while(turn.suit.size() < turn.count) {
+				int random = rand() % suitsBuff.size();
+				auto it = find(turn.suit.begin(), turn.suit.end(), suitsBuff[random]);
+				if(it == turn.suit.end()){
+					turn.suit.push_back(suitsBuff[random]);
+				}
+                suitsBuff.erase(suitsBuff.begin() + random);
+			}
+		}
+		else{
+			int random = rand() % combinations.size();
+			for(auto card : combinations[random]){
+				turn.suit.push_back(card.Suit());
+			}
+			for(auto card : peopleHave[turn.player]) {
+				if(turn.type == card.Type()){
+					turn.suit.push_back(card.Suit());
+				}
+			}
 		}
 		return turn;
 	}

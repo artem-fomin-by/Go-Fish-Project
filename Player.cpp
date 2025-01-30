@@ -126,6 +126,24 @@ bool InternalComputerPlayer::MakeTurn(int& indexOfPlayer){
 	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
 	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
+    if(IsHaveBox() != -1){
+        boxes++;
+		Type boxType = types[IsHaveBox()];
+		userInteraction->ShowNewBox(boxType, this);
+
+		game->Player1()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player2()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player3()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player4()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+
+		for(int i = 0; i < deck.GetSize(); i++){
+			if(deck[i].Type() == boxType){
+				deck.PopCard(deck[i].Type(), deck[i].Suit());
+				i--;
+			}
+		}
+	}
+
 //	while(true){
     Turn turn = intellegence->MakeTurnEasy();
 	int chosenPlayerInt = turn.player;

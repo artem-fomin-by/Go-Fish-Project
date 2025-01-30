@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iostream>
 #include <ConsoleUi.cpp>
+#include "Unit2.h"
 
 ConsoleHumanPlayer::ConsoleHumanPlayer() {
     boxes = 0;
@@ -21,21 +22,45 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
 	consoleUI->ShowCards(this);
+
+	if(IsHaveBox() != -1){
+		boxes++;
+		Type boxType = types[IsHaveBox()];
+		userInteraction->ShowNewBox(boxType, this);
+
+		game->Player1()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player2()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player3()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player4()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+
+		for(int i = 0; i < deck.GetSize(); i++){
+			if(deck[i].Type() == boxType){
+				deck.PopCard(deck[i].Type(), deck[i].Suit());
+				i--;
+			}
+		}
+        consoleUI->ShowCards(this);
+	}
+
 	int chosenPlayerInt = 5;
 
 	std::vector<Player*> players = {game->Player1(), game->Player2(), game->Player3(), game->Player4()};
 
 	int counter = 1;
 	std::cout << '\n';
+	fout << '\n';
 	for(int i = 0; i < 4; i++){
 		if(indexOfPlayer == i)
 			continue;
 		std::cout << counter++ << " - " << players[i]->Name() << '\n';
+		fout << counter << " - " << players[i]->Name() << '\n';
 	}
 	std::cout << '\n';
+	fout << '\n';
 
 	while(chosenPlayerInt >= 4){
 		std::cout << "Введите номер игрока, которого хотите выбрать: ";
+		fout << "Введите номер игрока, которого хотите выбрать: ";
 		std::cin >> chosenPlayerInt;
 	}
 
@@ -45,15 +70,19 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 		chosenPlayerInt++;
 
 	std::cout << '\n';
+	fout << '\n';
 	for(int i = 0; i < 13; i++){
 		std::cout << i + 1 << " - " << TypeTranslator(types[i]) << '\n';
+		fout << i + 1 << " - " << TypeTranslator(types[i]) << '\n';
 	}
 	std::cout << '\n';
+	fout << '\n';
 
 	int chosenTypeInt = 14;
 
 	while(chosenTypeInt > 13){
 		std::cout << "Введите номер типа, про который вы хотите спросить: ";
+        fout << "Введите номер типа, про который вы хотите спросить: ";
 		std::cin >> chosenTypeInt;
 	}
 	chosenTypeInt--;
@@ -95,6 +124,7 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	int chosenCount = 5;
 	while(chosenCount > 4) {
 		std::cout << "Введите количетво карт: ";
+		fout << "Введите количетво карт: ";
 		std::cin >> chosenCount;
 	}
 	//chosenCount--;
@@ -118,12 +148,19 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	}
 	std::cout << '\n';
 
+	fout << '\n';
+	for(int i = 0; i < 4; i++){
+		fout << i + 1 << " - " << SuitTranslator(suits[i]) << '\n';
+	}
+	fout << '\n';
+
 	std::vector<Suit> chosenSuits;
 	std::vector<int> chosenSuitsInt;
 
 	for(int i = 0; i < chosenCount; i++){
 		int nextChoise = 5;
 		while(nextChoise > 4 && find(chosenSuitsInt.begin(), chosenSuitsInt.end(), nextChoise) == chosenSuitsInt.end()){
+			fout << "Выберите номер масти: ";
 			std::cout << "Выберите номер масти: ";
 			std::cin >> nextChoise;
 		}
