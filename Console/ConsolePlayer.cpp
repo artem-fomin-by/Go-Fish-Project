@@ -21,6 +21,26 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
 
 	consoleUI->ShowCards(this);
+
+	if(IsHaveBox() != -1){
+		boxes++;
+		Type boxType = types[IsHaveBox()];
+		userInteraction->ShowNewBox(boxType, this);
+
+		game->Player1()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player2()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player3()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player4()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+
+		for(int i = 0; i < deck.GetSize(); i++){
+			if(deck[i].Type() == boxType){
+				deck.PopCard(deck[i].Type(), deck[i].Suit());
+				i--;
+			}
+		}
+        consoleUI->ShowCards(this);
+	}
+
 	int chosenPlayerInt = 5;
 
 	std::vector<Player*> players = {game->Player1(), game->Player2(), game->Player3(), game->Player4()};
@@ -54,7 +74,7 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 
 	while(chosenTypeInt > 13){
 		std::cout << "¬ведите номер типа, про который вы хотите спросить: ";
-		std::cin >> chosenTypeInt;
+        std::cin >> chosenTypeInt;
 	}
 	chosenTypeInt--;
 
@@ -80,6 +100,12 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	}
 
 	response = chosenPlayer->TypeRequest(chosenType);
+
+	game->Player1()->Intellegence()->registrateTypeResponse(chosenPlayerInt, chosenType, response);
+	game->Player2()->Intellegence()->registrateTypeResponse(chosenPlayerInt, chosenType, response);
+	game->Player3()->Intellegence()->registrateTypeResponse(chosenPlayerInt, chosenType, response);
+	game->Player4()->Intellegence()->registrateTypeResponse(chosenPlayerInt, chosenType, response);
+
 	//userInteraction->ShowTypeResponse(response, chosenPlayer);
 	if(!response){
 		indexOfPlayer = (indexOfPlayer + 1) % 4;
@@ -94,6 +120,12 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	//chosenCount--;
 	//userInteraction->ShowCountRequest(chosenCount, chosenType, chosenPlayer);
 	response = chosenPlayer->CountRequest(chosenCount, chosenType);
+
+	game->Player1()->Intellegence()->registrateCountResponse(chosenPlayerInt, chosenType, chosenCount, response);
+	game->Player2()->Intellegence()->registrateCountResponse(chosenPlayerInt, chosenType, chosenCount, response);
+	game->Player3()->Intellegence()->registrateCountResponse(chosenPlayerInt, chosenType, chosenCount, response);
+	game->Player4()->Intellegence()->registrateCountResponse(chosenPlayerInt, chosenType, chosenCount, response);
+
 	//userInteraction->ShowCountResponse(response, chosenPlayer);
 	if(!response){
 		indexOfPlayer = (indexOfPlayer + 1) % 4;
@@ -123,6 +155,12 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 
 	//userInteraction->ShowSuitRequest(chosenType, chosenSuits, chosenPlayer);
 	response = chosenPlayer->SuitRequest(chosenType, chosenSuits);
+
+	game->Player1()->Intellegence()->registrateSuitResponse(chosenPlayerInt, indexOfPlayer, chosenType, chosenCount, chosenSuits, response);
+	game->Player2()->Intellegence()->registrateSuitResponse(chosenPlayerInt, indexOfPlayer, chosenType, chosenCount, chosenSuits, response);
+	game->Player3()->Intellegence()->registrateSuitResponse(chosenPlayerInt, indexOfPlayer, chosenType, chosenCount, chosenSuits, response);
+    game->Player4()->Intellegence()->registrateSuitResponse(chosenPlayerInt, indexOfPlayer, chosenType, chosenCount, chosenSuits, response);
+
 	//userInteraction->ShowSuitResponse(response, chosenPlayer);
 	if(!response){
 		indexOfPlayer = (indexOfPlayer + 1) % 4;
@@ -136,8 +174,15 @@ bool ConsoleHumanPlayer::MakeTurn(int& indexOfPlayer) {
 	}
 
 	if(IsHaveBox() != -1){
+    	boxes++;
 		Type boxType = types[IsHaveBox()];
 		userInteraction->ShowNewBox(boxType, this);
+
+		game->Player1()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player2()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player3()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+		game->Player4()->Intellegence()->registrateNewChest(indexOfPlayer, boxType);
+
 		for(int i = 0; i < deck.GetSize(); i++){
 			if(deck[i].Type() == boxType){
 				deck.PopCard(deck[i].Type(), deck[i].Suit());

@@ -39,6 +39,10 @@ bool Card::operator< (Card card){
 
 }
 
+bool Card::operator ==(Card card){
+    return card.Type() == type && card.Suit() == suit;
+}
+
 //---------------------------------------------------------------------------
 // Deck methods
 
@@ -52,6 +56,12 @@ Deck::Deck(std::vector<Card> deck){     		 // Takes vector of
 }
 
 void Deck::AddNewCard(Card card){        		 // Push new card to Deck
+	deck.push_back(card);
+	size++;
+}
+
+void Deck::AddNewCard(Type type, Suit suit){        		 // Push new card to Deck
+    Card card(suit, type);
 	deck.push_back(card);
 	size++;
 }
@@ -115,6 +125,18 @@ void Deck::PopCard(Type type, Suit suit){        // Pop card with taken type and
     size--;
 }
 
+void Deck::PopCard(Card card){        // Pop card with taken type and suit
+	Type type = card.Type();
+    Suit suit = card.Suit();
+	for(int i = 0; i < deck.size(); i++){
+		if(deck[i].Suit() == suit && deck[i].Type() == type){
+			deck.erase(deck.begin() + i);
+            return;
+		}
+	}
+    size--;
+}
+
 std::vector<Card>::iterator Deck::begin(){       // Returned begin iterator
     return deck.begin();
 }
@@ -133,4 +155,14 @@ std::vector<Card>::reverse_iterator Deck::rend(){        // Returned rend iterat
 
 Card Deck::operator [](int index){
     return deck[index];
+}
+
+bool Deck::operator ==(Deck deck){
+	if(deck.GetSize() != this->deck.size())
+		return false;
+	for(auto i : this->deck){
+		if(deck.HaveCardWithTypeAndSuit(i.Type(), i.Suit()) == -1)
+			return false;
+	}
+    return true;
 }

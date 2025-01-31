@@ -159,6 +159,10 @@
         <CppCompile Include="..\GoFish.cpp">
             <BuildOrder>9</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\Intellegence.cpp">
+            <DependentOn>..\Intellegence.h</DependentOn>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\Player.cpp">
             <DependentOn>..\Player.h</DependentOn>
             <BuildOrder>10</BuildOrder>

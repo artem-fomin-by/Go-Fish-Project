@@ -8,6 +8,7 @@
 #include <string>
 #include "GameCommands.h"
 #include "UserInteraction.h"
+#include "Intellegence.h"
 
 class Game;
 
@@ -21,6 +22,8 @@ protected:
 	UserInteraction* userInteraction;
 	Player();							  // Default constructor, doing nothing
 	int boxes;
+	Intellegence* intellegence;
+
 
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
@@ -33,6 +36,7 @@ public:
 	const Deck& Deck() const;   
 	const std::string& Name() const;
 	const UserInteraction* UserInteraction() const;
+	const Intellegence* Intellegence() const;
 	const int& Boxes() const;
     const Game* Game() const;
 
@@ -40,6 +44,7 @@ public:
 	class Deck& Deck();
 	std::string& Name();
 	class UserInteraction*& UserInteraction();
+    class Intellegence*& Intellegence();
     class Game*& Game();
 
     int IsHaveBox();

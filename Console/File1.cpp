@@ -5,9 +5,24 @@
 #include "ConsolePlayer.h"
 #include <string>
 #include <windows.h>
+#include "Intellegence.h"
+#include <ctime>
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+
+    std::time_t currentTime = std::time(nullptr);
+	std::tm *localTime = std::localtime(&currentTime);
+
+	std::string s1 = std::to_string(localTime->tm_mday);
+	std::string s2 = std::to_string(localTime->tm_mon + 1);
+	std::string s3 = std::to_string(localTime->tm_year + 1900);
+	std::string s4 = std::to_string(localTime->tm_hour);
+	std::string s5 = std::to_string(localTime->tm_min);
+	std::string s6 = std::to_string(localTime->tm_sec);
+
+	std::string path = "logs/" + s1 + "." + s2 + "." + s3 + "_" + s4 + "-" + s5 + "-" + s6 + ".txt";
+
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
 	std::string buff;
@@ -26,7 +41,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		auto player2 = new InternalComputerPlayer();
 		auto player3 = new InternalComputerPlayer();
         auto player4 = new InternalComputerPlayer();
-		auto player1 = new ConsoleHumanPlayer();
+		auto player1 = new InternalComputerPlayer();
 
         player2->Name() = "Геннадий";
 		player3->Name() = "Каролина";
@@ -43,5 +58,4 @@ int _tmain(int argc, _TCHAR* argv[])
         game->MainLoop();
 	}
     std::system("pause");
-    std::cin >> buff;
 }
