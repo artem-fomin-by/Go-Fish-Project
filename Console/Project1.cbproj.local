@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.451,=E:\My_code\CBuilder\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.101,E:\My_code\CBuilder\Project1PCH1.h=E:\My_code\c++\CBuilder\GoFish\Console\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.232,=E:\My_code\CBuilder\File1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.110,E:\My_code\CBuilder\File1.cpp=E:\My_code\c++\CBuilder\GoFish\Console\File1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.115,E:\My_code\CBuilder\Project1.cbproj=E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.033,=E:\My_code\c++\CBuilder\GoFish\Console\ConsoleUi.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.990,E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj=E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.290,=E:\My_code\c++\CBuilder\GoFish\Console\ConsoleUi.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.492,=E:\My_code\CBuilder\Unit2.cpp</Transaction>
-    <Transaction>2025.01.24 22:23:03.195,=E:\My_code\CBuilder\Project1PCH1.h</Transaction>
-    <Transaction>2025.01.24 22:23:03.232,=E:\My_code\CBuilder\File1.cpp</Transaction>
-    <Transaction>2025.01.24 22:24:07.101,E:\My_code\c++\CBuilder\GoFish\Console\Project1PCH1.h=E:\My_code\CBuilder\Project1PCH1.h</Transaction>
-    <Transaction>2025.01.24 22:24:07.110,E:\My_code\c++\CBuilder\GoFish\Console\File1.cpp=E:\My_code\CBuilder\File1.cpp</Transaction>
-    <Transaction>2025.01.24 22:24:07.115,E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj=E:\My_code\CBuilder\Project1.cbproj</Transaction>
-    <Transaction>2025.01.24 22:24:08.990,E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj=E:\My_code\c++\CBuilder\GoFish\Console\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.451,=E:\My_code\CBuilder\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.195,=E:\My_code\CBuilder\Project1PCH1.h</Transaction>
   </Transactions>
 </BorlandProject>

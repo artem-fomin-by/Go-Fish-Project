@@ -44,6 +44,7 @@ public:
 	enum Suit& Suit();                                    // Setter method, seted Suit
 	const Type& Type() const;              		 	 // Getter method, returned Type
 	enum Type& Type();                                    // Setter method, seted Type
+    bool operator< (Card);
 };
 
 class Deck{                            		 		 // Deck class
@@ -71,6 +72,7 @@ public:
 	std::vector<Card>::reverse_iterator rbegin();    // Returned rbegin iterator
 	std::vector<Card>::iterator end();         		 // Returned end iterator
 	std::vector<Card>::reverse_iterator rend();      // Returned rend iterator
+    Card operator[](int);
 };
 #endif
 

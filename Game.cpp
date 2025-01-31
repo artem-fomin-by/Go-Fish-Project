@@ -2,13 +2,97 @@
 // contains main Game class
 
 #include "Game.h"
+#include <ctime>
+#include <cstdlib>
+#include <algorithm>
 
 Game::Game() {                                        	  // Default constructure
 
 }
 
 void Game::MainLoop() {                               // Main loop
+	std::vector<Player*> players = {player1, player2, player3, player4};
 
+	while(true){
+		//srand(time(nullptr));
+        gameUI->ShowWhoseTurnNow(players[currentPlayer]);
+		if(players[currentPlayer]->MakeTurn(currentPlayer))
+			break;
+		if(CheckEndOfGame() != -1){
+			int maxCountOfBox = CheckEndOfGame();
+
+            std::vector<Player*> winners;
+
+			for(auto i : players){
+				if(i->Boxes() == maxCountOfBox)
+                    winners.push_back(i);
+			}
+
+			gameUI->ShowWin(winners);
+            break;
+		}
+		//currentPlayer = (currentPlayer + 1) % 4;
+	}
+}
+
+void Game::StartGame(Player* player1, Player* player2, Player* player3, Player* player4, UserInteraction* userInteraction, GameUI* gameUI) {
+    srand(time(nullptr));
+	player1->UserInteraction() = userInteraction;
+	player2->UserInteraction() = userInteraction;
+	player3->UserInteraction() = userInteraction;
+	player4->UserInteraction() = userInteraction;
+
+    player1->Game() = this;
+	player2->Game() = this;
+	player3->Game() = this;
+	player4->Game() = this;
+
+	this->player1 = player1;
+	this->player2 = player2;
+	this->player3 = player3;
+	this->player4 = player4;
+
+    currentPlayer = 0;
+    this->gameUI = gameUI;
+
+	std::vector<Suit> suits = {Hearts, Spades, Diamonds, Clubs};
+    std::vector<Type> types = {Two, Three, Four, Five, Six,	Seven, Eight, Nine, Ten, Jack, Queen, King, Ace};
+
+	std::vector<Card> cards;
+
+	for(int i = 0; i < 13; i++){
+		for(int j = 0; j < 4; j++){
+			cards.push_back(Card(suits[j], types[i]));
+		}
+	}
+
+	srand(time(nullptr));
+
+	std::random_shuffle(cards.begin(), cards.end());
+
+    int indexOfCards = 0;
+
+	for(int i = 0; i < 13; i++){
+		player1->Deck().AddNewCard(cards[indexOfCards++]);
+		player2->Deck().AddNewCard(cards[indexOfCards++]);
+		player3->Deck().AddNewCard(cards[indexOfCards++]);
+		player4->Deck().AddNewCard(cards[indexOfCards++]);
+	}
+}
+
+int Game::CheckEndOfGame(){
+	std::vector<Player*> players = {player1, player2, player3, player4};
+
+	for(auto i : players)
+		if(i->Deck().GetSize() != 0)
+            return -1;
+
+	int maxOfBoxes = 0;
+	for(int i = 0; i < 4; i++)
+		if(players[maxOfBoxes]->Boxes() < players[i]->Boxes())
+			maxOfBoxes = i;
+
+    return maxOfBoxes;
 }
 
 const Player* Game::Player1() const {                 // Getter method's
@@ -41,103 +125,5 @@ Player* Game::Player3() {
 
 Player* Game::Player4(){
     return player4;
-}
-
-const std::function<bool(Type)>& GameState::getPlayer1TypeRequest() const{
-    return player1TypeRequest;
-}
-const std::function<bool(Type)>& GameState::getPlayer2TypeRequest() const{
-    return player2TypeRequest;
-}
-const std::function<bool(Type)>& GameState::getPlayer3TypeRequest() const{
-    return player3TypeRequest;
-}
-const std::function<bool(Type)>& GameState::getPlayer4TypeRequest() const{
-    return player4TypeRequest;
-}
-
-const std::function<bool(int, Type)>& GameState::getPlayer1CountRequest() const{
-    return player1CountRequest;
-}
-const std::function<bool(int, Type)>& GameState::getPlayer2CountRequest() const{
-    return player2CountRequest;
-}
-const std::function<bool(int, Type)>& GameState::getPlayer3CountRequest() const{
-	return player3CountRequest;
-}
-const std::function<bool(int, Type)>& GameState::getPlayer4CountRequest() const{
-    return player4CountRequest;
-}
-
-const std::function<bool(Type, const std::vector<Suit>&)>& GameState::getPlayer1SuitRequest() const{
-    return player1SuitRequest;
-}
-const std::function<bool(Type, const std::vector<Suit>&)>& GameState::getPlayer2SuitRequest() const{
-    return player2SuitRequest;
-}
-const std::function<bool(Type, const std::vector<Suit>&)>& GameState::getPlayer3SuitRequest() const{
-    return player3SuitRequest;
-}
-const std::function<bool(Type, const std::vector<Suit>&)>& GameState::getPlayer4SuitRequest() const{
-    return player4SuitRequest;
-}
-
-void GameState::setPlayer1TypeRequest(const std::function<bool(Type)>& callback){
-    player1TypeRequest = callback;
-}
-void GameState::setPlayer2TypeRequest(const std::function<bool(Type)>& callback){
-    player2TypeRequest = callback;
-}
-void GameState::setPlayer3TypeRequest(const std::function<bool(Type)>& callback){
-    player3TypeRequest = callback;
-}
-void GameState::setPlayer4TypeRequest(const std::function<bool(Type)>& callback){
-    player4TypeRequest = callback;
-}
-
-void GameState::setPlayer1CountRequest(const std::function<bool(int, Type)>& callback){
-    player1CountRequest = callback;
-}
-void GameState::setPlayer2CountRequest(const std::function<bool(int, Type)>& callback){
-    player2CountRequest = callback;
-}
-void GameState::setPlayer3CountRequest(const std::function<bool(int, Type)>& callback){
-    player3CountRequest = callback;
-}
-void GameState::setPlayer4CountRequest(const std::function<bool(int, Type)>& callback){
-    player4CountRequest = callback;
-}
-
-void GameState::setPlayer1SuitRequest(const std::function<bool(Type, const std::vector<Suit>&)>& callback){
-    player1SuitRequest = callback;
-}
-void GameState::setPlayer2SuitRequest(const std::function<bool(Type, const std::vector<Suit>&)>& callback){
-    player2SuitRequest = callback;
-}
-void GameState::setPlayer3SuitRequest(const std::function<bool(Type, const std::vector<Suit>&)>& callback){
-    player3SuitRequest = callback;
-}
-void GameState::setPlayer4SuitRequest(const std::function<bool(Type, const std::vector<Suit>&)>& callback){
-    player4SuitRequest = callback;
-}
-
-GameState::GameState(){
-
-}
-GameState::GameState(Player* player1, Player* player2, Player* player3, Player* player4){
-    player1TypeRequest = player1->TypeRequest;
-    player2TypeRequest = player2->TypeRequest;
-    player3TypeRequest = player3->TypeRequest;
-    player4TypeRequest = player4->TypeRequest;
-
-    player1CountRequest = player1->CountRequest;
-    player2CountRequest = player2->CountRequest;
-    player3CountRequest = player3->CountRequest;
-    player4CountRequest = player4->CountRequest;
-
-    player1SuitRequest = player1->SuitRequest;
-    player2SuitRequest = player2->SuitRequest;
-    player3SuitRequest = player3->SuitRequest;
-    player4SuitRequest = player4->SuitRequest;
 }
 

@@ -5,19 +5,24 @@
 //---------------------------------------------------------------------------
 #include "CardAndDeck.h"
 //---------------------------------------------------------------------------
+class Player;
+
+
 class UserInteraction
 {
     public:
     virtual ~UserInteraction();
     
-    virtual void ShowTypeRequest(Type) = 0;
-    virtual void ShowTypeResponse(bool) = 0;    
+	virtual void ShowTypeRequest(Type, Player*) = 0;
+	virtual void ShowTypeResponse(bool, Player*) = 0;
     
-    virtual void ShowCountRequest(int, Type) = 0;
-    virtual void ShowCountResponse(bool) = 0;
+	virtual void ShowCountRequest(int, Type, Player*) = 0;
+	virtual void ShowCountResponse(bool, Player*) = 0;
 
-    virtual void ShowSuitRequest(Type, const std::vector<Suit>&) = 0;
-    virtual void ShowSuitResponse(bool) = 0;
+	virtual void ShowSuitRequest(Type, const std::vector<Suit>&, Player*) = 0;
+	virtual void ShowSuitResponse(bool, Player*) = 0;
+
+	virtual void ShowNewBox(Type, Player*) = 0;
 };
 //---------------------------------------------------------------------------
 class SystemUI : public UserInteraction
@@ -26,14 +31,16 @@ class SystemUI : public UserInteraction
     SystemUI();
     ~SystemUI();
     
-    void ShowTypeRequest(Type) override;
-	void ShowTypeResponse(bool) override;
+	void ShowTypeRequest(Type, Player*) override;
+	void ShowTypeResponse(bool, Player*) override;
     
-	void ShowCountRequest(int, Type) override;
-    void ShowCountResponse(bool) override;
+	void ShowCountRequest(int, Type, Player*) override;
+	void ShowCountResponse(bool, Player*) override;
 
-    void ShowSuitRequest(Type, const std::vector<Suit>&) override;
-    void ShowSuitResponse(bool) override;
+	void ShowSuitRequest(Type, const std::vector<Suit>&, Player*) override;
+	void ShowSuitResponse(bool, Player*) override;
+
+	void ShowNewBox(Type, Player*) override;
 };
 //---------------------------------------------------------------------------
 #endif

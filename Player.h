@@ -9,23 +9,23 @@
 #include "GameCommands.h"
 #include "UserInteraction.h"
 
-class GameState;
+class Game;
 
 //------------------------------------------------------------------------------
 
 class Player{									// abstract class Player
-private:
-	UserInteraction* userInteraction;
+protected:
 	Deck deck;
 	std::string name;
-
-protected:
-	Player();                                   // Default constructor, doing nothing
+    Game* game;
+	UserInteraction* userInteraction;
+	Player();							  // Default constructor, doing nothing
+	int boxes;
 
 public:
 	virtual ~Player();                          // Default destructor, doing nothing
 
-	virtual std::vector<GameCommand*> MakeTurn(const GameState&) = 0;                // Method which do turn of a player
+	virtual bool MakeTurn(int&) = 0;                // Method which do turn of a player
 	bool TypeRequest(Type);
 	bool CountRequest(int, Type);
 	bool SuitRequest(Type, const std::vector<Suit>&);
@@ -33,10 +33,16 @@ public:
 	const Deck& Deck() const;   
 	const std::string& Name() const;
 	const UserInteraction* UserInteraction() const;
+	const int& Boxes() const;
+    const Game* Game() const;
 
+    int& Boxes();
 	class Deck& Deck();
 	std::string& Name();
-	class UserInteraction* UserInteraction();
+	class UserInteraction*& UserInteraction();
+    class Game*& Game();
+
+    int IsHaveBox();
 };
 
 //------------------------------------------------------------------------------
@@ -44,21 +50,23 @@ public:
 class HumanPlayer : public Player{      		// HumanPlayer class
 public:
 	HumanPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player              		// Method which answer the question
+	bool MakeTurn(int&) override;                    		// Method which do turn of a player              		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class InternalComputerPlayer : public Player {  // InternalComputerPlayer class
-    InternalComputerPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                    		// Method which do turn of a player           		// Method which answer the question
+public:
+	InternalComputerPlayer();
+	bool MakeTurn(int&) override;                    		// Method which do turn of a player           		// Method which answer the question
 };
 
 //------------------------------------------------------------------------------
 
 class ExternalComputerPlayer : public Player { 	// ExternalComputerPlayer class
-    ExternalComputerPlayer();
-	std::vector<GameCommand*> MakeTurn(const GameState&) override;                   		 	// Method which do turn of a player     		// Method which answer the question
+public:
+	ExternalComputerPlayer();
+	bool MakeTurn(int&) override;                   		 	// Method which do turn of a player     		// Method which answer the question
 };
 #endif
 

@@ -41,6 +41,8 @@
 *.res
 *.tds
 *.local
+*.cbproj.local
+*.groupproj.local
 
 # CPPBuilder directories
 __history
